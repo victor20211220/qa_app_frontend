@@ -59,11 +59,11 @@ const ViewInfluencer = () => {
                                     <p className="text-muted mb-0">{data.category_name}</p>
                                 </div>
 
-                                <div className="d-flex gap-2 mt-3 mt-md-0">
-                                    <Button as={Link} to={`/questioner/view-data?answerer_id=${data._id}`}
-                                            variant="primary" target="_blank">
-                                        Ask
-                                    </Button>
+                                <div className="d-flex gap-2 mt-md-0">
+                                    <div className="d-flex justify-content-end gap-3">
+                                        <Button variant="primary">Follow</Button>
+                                        <Button variant="outline-light" className="rounded-pill">Share</Button>
+                                    </div>
                                 </div>
                             </div>
 
