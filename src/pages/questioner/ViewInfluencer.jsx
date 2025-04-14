@@ -26,7 +26,7 @@ const ViewInfluencer = () => {
 
     const formatRating = (rating, reviews) => {
         const formatted = reviews > 999 ? `${(reviews / 1000).toFixed(1)}k` : reviews;
-        return `⭐ ${rating.toFixed(1)} (${formatted} reviews)`;
+        return `${rating.toFixed(1)} (${formatted} reviews)`;
     };
 
     const formatResponseTime = (hours) => `Avg. response time: ${Math.round(hours)} hours`;
