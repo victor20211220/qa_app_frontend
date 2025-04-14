@@ -1,0 +1,14 @@
+// Override Bootstrap variables BEFORE importing bootstrap
+$primary: #4F46E5;
+$secondary: #9CA3AF;
+$info: #7C3AED;
+$dark: #111827;
+$success: #10B981;
+$gray: #f9fafb;
+
+
+$font-family-base: 'Inter', sans-serif;
+
+@import 'bootstrap/scss/bootstrap';
+@import 'customs';
+@import 'text';

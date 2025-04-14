@@ -1,0 +1,64 @@
+h1 {
+    font-size: 48px;
+    font-weight: bold;
+    color: #111827;
+}
+
+h2 {
+    font-size: 24px;
+    color: #1F2937;
+    font-weight: bold;
+}
+
+h3 {
+    font-size: 30px;
+}
+
+.text-dark {
+    color: #111827;
+}
+
+.text-36 {
+    font-size: 36px;
+}
+
+.text-24 {
+    font-size: 24px;
+}
+.text-20 {
+    font-size: 20px;
+}
+
+.text-18 {
+    font-size: 18px;
+}
+
+.text-12{
+    font-size: 12px;
+}
+.text-14 {
+    font-size: 14px;
+}
+
+@media(max-width: 991px) {
+    h1 {
+        font-size: 32px;
+    }
+}
+
+.rounded-12 {
+    border-radius: 12px;
+}
+
+.text-muted{
+    color: #6B7280 !important;
+}
+.text-374151{
+    color: #374151;
+}
+.text-4B5563{
+    color: #4B5563;
+}
+.text-hover-danger:hover {
+  color: #dc3545 !important; /* Bootstrap's `text-danger` color */
+}
