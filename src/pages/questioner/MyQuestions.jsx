@@ -1,21 +1,14 @@
 import React, {useEffect, useState} from 'react';
 import axios from '../../utils/axios';
-import {Card, Button, Spinner, Image, Dropdown, Row, Col, Container} from 'react-bootstrap';
-import {Link, useSearchParams} from 'react-router-dom';
+import {Button, Spinner, Row, Col, Container} from 'react-bootstrap';
+import {useSearchParams} from 'react-router-dom';
 import {toast} from 'react-toastify';
 import {questionStatusFilterOptions} from "../../utils/helpers.js";
-import {useNavigate} from "react-router-dom";
 import StatsCard from "../../components/StatsCard.jsx";
 import TableCard from "../../components/TableCard.jsx";
-import InfluencerQuestionCard from "../../components/influencer/InfluencerQuestionCard.jsx";
 import QuestionerQuestionCard from "../../components/questioner/QuestionerQuestionCard.jsx";
 import CustomSelect from "../../components/CustomSelect.jsx";
 
-const STATUS_LABELS = {
-    0: 'Pending',
-    1: 'Answered',
-    2: 'Expired',
-};
 
 const MyQuestions = () => {
     const [stats, setStats] = useState(null);
@@ -70,12 +63,6 @@ const MyQuestions = () => {
             toast.error(err ?? 'Failed to load your questions');
         }
         setLoading(false);
-    };
-
-    const handleStatusChange = (eventKey) => {
-        const value = eventKey === 'null' ? null : Number(eventKey);
-        setStatusFilter(value);
-        setPage(1);
     };
 
     if (!stats) return <Spinner animation="border"/>;

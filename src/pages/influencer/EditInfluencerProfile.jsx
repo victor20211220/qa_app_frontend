@@ -1,7 +1,5 @@
 import {useEffect, useState} from 'react';
 import {Form, Button, Row, Col, Image, Container, Card} from 'react-bootstrap';
-import {useNavigate} from 'react-router-dom';
-import {TagsInput} from "react-tag-input-component";
 import {toast} from 'react-toastify';
 import axios from '../../utils/axios.js';
 import {useAppContext} from '../../context/AppContext.jsx';
@@ -45,11 +43,9 @@ const customStyles = {
 };
 
 const EditInfluencerProfile = () => {
-    const navigate = useNavigate();
     const {setUser} = useAppContext();
     const [form, setForm] = useState({
         name: '',
-        hourly_rate: '',
         instagram: '',
         youtube: '',
         tiktok: '',
@@ -68,7 +64,6 @@ const EditInfluencerProfile = () => {
             const res = await axios.get('/answerers/me');
             setForm({
                 name: res.data.name || '',
-                hourly_rate: res.data.hourly_rate || '',
                 instagram: res.data.instagram || '',
                 youtube: res.data.youtube || '',
                 tiktok: res.data.tiktok || '',
@@ -96,7 +91,7 @@ const EditInfluencerProfile = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        if (!form.name.trim() || !form.hourly_rate || Number(form.hourly_rate) <= 0) {
+        if (!form.name.trim()) {
             toast.error('Please fill in all required fields with valid values');
             return;
         }
@@ -104,7 +99,6 @@ const EditInfluencerProfile = () => {
         try {
             const formData = new FormData();
             formData.append('name', form.name);
-            formData.append('hourly_rate', form.hourly_rate);
             formData.append('instagram', form.instagram);
             formData.append('youtube', form.youtube);
             formData.append('tiktok', form.tiktok);
@@ -142,12 +136,11 @@ const EditInfluencerProfile = () => {
                                 {photoPreview && (
                                     <Image src={photoPreview} roundedCircle width={80} height={80} className="me-4"/>
                                 )}
-                                {/*<Form.Control type="file" accept="image/*" onChange={handlePhotoChange}/>*/}
                                 <CustomFileInput handlePhotoChange={handlePhotoChange}/>
                             </Form.Group>
 
                             <Form.Group controlId="name" className="mb-3 col-lg-6">
-                                <Form.Label>Full Name *</Form.Label>
+                                <Form.Label column="name">Full Name *</Form.Label>
                                 <Form.Control
                                     name="name"
                                     value={form.name}
@@ -157,28 +150,14 @@ const EditInfluencerProfile = () => {
                             </Form.Group>
                             <div className="mb-3 pb-3"></div>
                             <h2 className="text-20 fw-bold mb-4">Expertise & Rates</h2>
-                            <Form.Group className="mb-3">
-                                <Form.Label htmlFor="name">Areas of Expertise</Form.Label>
-                                {/*<TagsInput value={expertise} onChange={setExpertise}*/}
-                                {/*           placeholder="Type and press enter"/>*/}
+                            <Form.Group controlId="expertise" className="mb-3">
+                                <Form.Label column="expertise">Areas of Expertise</Form.Label>
                                 <CreatableSelect
                                     isMulti
                                     value={expertise.map((e) => ({label: e, value: e}))}
                                     onChange={(selected) => setExpertise(selected.map((s) => s.value))}
                                     placeholder="+ Add More"
                                     styles={customStyles}
-                                />
-                            </Form.Group>
-
-                            <Form.Group controlId="hourly_rate" className="mb-3 col-lg-3">
-                                <Form.Label>Hourly Rate ($) *</Form.Label>
-                                <Form.Control
-                                    type="number"
-                                    name="hourly_rate"
-                                    value={form.hourly_rate}
-                                    onChange={handleChange}
-                                    required
-                                    min={1}
                                 />
                             </Form.Group>
                             <Educations/>
@@ -188,7 +167,7 @@ const EditInfluencerProfile = () => {
                             <Row className="g-3 mb-4">
                                 <Col md={6}>
                                     <Form.Group controlId="instagram">
-                                        <Form.Label><i className="fa-brands fa-instagram me-2"></i>Instagram
+                                        <Form.Label column="instagram"><i className="fa-brands fa-instagram me-2"></i>Instagram
                                             Username</Form.Label>
                                         <Form.Control
                                             name="instagram"
@@ -199,8 +178,8 @@ const EditInfluencerProfile = () => {
                                     </Form.Group>
                                 </Col>
                                 <Col md={6}>
-                                    <Form.Group controlId="twitter">
-                                        <Form.Label><i className="fa-brands fa-youtube me-2"></i>Youtube
+                                    <Form.Group controlId="youtube">
+                                        <Form.Label column="youtube"><i className="fa-brands fa-youtube me-2"></i>Youtube
                                             Channel</Form.Label>
                                         <Form.Control
                                             type="url"
@@ -215,7 +194,7 @@ const EditInfluencerProfile = () => {
                             <Row className="g-3 mb-4">
                                 <Col md={6}>
                                     <Form.Group controlId="tiktok">
-                                        <Form.Label><i className="fa-brands fa-tiktok me-2"></i>TikTok
+                                        <Form.Label column="tikok"><i className="fa-brands fa-tiktok me-2"></i>TikTok
                                             Username</Form.Label>
                                         <Form.Control
                                             name="tiktok"

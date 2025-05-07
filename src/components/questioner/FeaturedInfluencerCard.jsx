@@ -8,8 +8,6 @@ const formatRating = (rating, reviews) => {
     return `⭐ ${rating.toFixed(1)} (${formatted} reviews)`;
 };
 
-const formatPrice = (price) => `$${price}/question`;
-
 const FeaturedInfluencerCard = ({influencer}) => {
     return (
         <Col md={6} lg={4}>
@@ -30,8 +28,6 @@ const FeaturedInfluencerCard = ({influencer}) => {
                             <span className="">
                               {formatRating(influencer.rating, influencer.number_of_reviews)}
                             </span>
-                            <span
-                                className="badge bg-success-subtle text-success fw-medium px-2 py-1 rounded-pill small">{formatPrice(influencer.hourly_rate)}</span>
                         </div>
                     </div>
                     <Button as={Link} to={`/questioner/view-influencer?answerer_id=${influencer._id}`}

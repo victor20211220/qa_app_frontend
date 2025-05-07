@@ -4,7 +4,6 @@ import {Tabs, Tab, Container, Row, Col, Form, Button, Card} from 'react-bootstra
 import {useNavigate, useSearchParams, Link} from 'react-router-dom';
 import axios from '../utils/axios';
 import {toast} from 'react-toastify';
-import Select from "react-select";
 import CustomSelect from "../components/CustomSelect.jsx";
 
 const Register = () => {
@@ -23,7 +22,6 @@ const Register = () => {
         instagram: '',
         youtube: '',
         tiktok: '',
-        hourly_rate: '',
     });
 
     const categoryOptions = categories.map((c) => ({
@@ -86,8 +84,8 @@ const Register = () => {
                                         <Row>
                                             <Col md={6}>
                                                 <h2 className="mb-4">Influencer Information</h2>
-                                                <Form.Group className="mb-3">
-                                                    <Form.Label>Full Name</Form.Label>
+                                                <Form.Group controlId="name" className="mb-3">
+                                                    <Form.Label column="name">Full Name</Form.Label>
                                                     <Form.Control
                                                         name="name"
                                                         type="text"
@@ -97,8 +95,8 @@ const Register = () => {
                                                         onChange={handleChange}
                                                     />
                                                 </Form.Group>
-                                                <Form.Group className="mb-3">
-                                                    <Form.Label>Email Address</Form.Label>
+                                                <Form.Group controlId="email" className="mb-3">
+                                                    <Form.Label column="email">Email Address</Form.Label>
                                                     <Form.Control
                                                         name="email"
                                                         type="email"
@@ -108,8 +106,8 @@ const Register = () => {
                                                         onChange={handleChange}
                                                     />
                                                 </Form.Group>
-                                                <Form.Group className="mb-3">
-                                                    <Form.Label>Password</Form.Label>
+                                                <Form.Group controlId="password" className="mb-3">
+                                                    <Form.Label column="password">Password</Form.Label>
                                                     <Form.Control
                                                         name="password"
                                                         type="password"
@@ -119,8 +117,8 @@ const Register = () => {
                                                         onChange={handleChange}
                                                     />
                                                 </Form.Group>
-                                                <Form.Group className="mb-3">
-                                                    <Form.Label>Category</Form.Label>
+                                                <Form.Group controlId="category_id" className="mb-3">
+                                                    <Form.Label column="category_id">Category</Form.Label>
                                                     <CustomSelect
                                                         name="category_id"
                                                         options={categoryOptions}
@@ -139,8 +137,8 @@ const Register = () => {
                                             </Col>
                                             <Col md={6}>
                                                 <h2 className="mb-4">Social Presence</h2>
-                                                <Form.Group className="mb-3">
-                                                    <Form.Label><i className="fa-brands fa-instagram me-2"></i>Instagram Username</Form.Label>
+                                                <Form.Group controlId="instagram" className="mb-3">
+                                                    <Form.Label column="instagram"><i className="fa-brands fa-instagram me-2"></i>Instagram Username</Form.Label>
                                                     <Form.Control
                                                         name="instagram"
                                                         type="text"
@@ -149,8 +147,8 @@ const Register = () => {
                                                         onChange={handleChange}
                                                     />
                                                 </Form.Group>
-                                                <Form.Group className="mb-3">
-                                                    <Form.Label><i className="fa-brands fa-youtube me-2"></i>Youtube Channel</Form.Label>
+                                                <Form.Group controlId="youtube" className="mb-3">
+                                                    <Form.Label column="youtube"><i className="fa-brands fa-youtube me-2"></i>Youtube Channel</Form.Label>
                                                     <Form.Control
                                                         name="youtube"
                                                         type="url"
@@ -159,24 +157,13 @@ const Register = () => {
                                                         onChange={handleChange}
                                                     />
                                                 </Form.Group>
-                                                <Form.Group className="mb-3">
-                                                    <Form.Label><i className="fa-brands fa-tiktok me-2"></i>TikTok Username</Form.Label>
+                                                <Form.Group controlId="tiktok" className="mb-3">
+                                                    <Form.Label column="tiktok"><i className="fa-brands fa-tiktok me-2"></i>TikTok Username</Form.Label>
                                                     <Form.Control
                                                         name="tiktok"
                                                         type="text"
                                                         placeholder="@username"
                                                         value={formData.tiktok}
-                                                        onChange={handleChange}
-                                                    />
-                                                </Form.Group>
-                                                <Form.Group className="mb-3">
-                                                    <Form.Label>Hourly Rate ($)</Form.Label>
-                                                    <Form.Control
-                                                        name="hourly_rate"
-                                                        type="number"
-                                                        placeholder="Enter your hourly rate"
-                                                        required
-                                                        value={formData.hourly_rate}
                                                         onChange={handleChange}
                                                     />
                                                 </Form.Group>
@@ -212,10 +199,10 @@ const Register = () => {
                                 <Card.Body>
                                     <Form onSubmit={handleSubmit}>
                                         <h2>User Information</h2>
-                                        <Form.Group className="mb-3">
-                                            <Form.Label>Full Name</Form.Label>
+                                        <Form.Group controlId="questioner_name" className="mb-3">
+                                            <Form.Label column="questioner_name">Full Name</Form.Label>
                                             <Form.Control
-                                                name="name"
+                                                name="questioner_name"
                                                 type="text"
                                                 placeholder="Enter your full name"
                                                 required
@@ -223,10 +210,10 @@ const Register = () => {
                                                 onChange={handleChange}
                                             />
                                         </Form.Group>
-                                        <Form.Group className="mb-3">
-                                            <Form.Label>Email Address</Form.Label>
+                                        <Form.Group controlId="questioner_email" className="mb-3">
+                                            <Form.Label column="questioner_email">Email Address</Form.Label>
                                             <Form.Control
-                                                name="email"
+                                                name="questioner_email"
                                                 type="email"
                                                 placeholder="Enter your email"
                                                 required
@@ -234,10 +221,10 @@ const Register = () => {
                                                 onChange={handleChange}
                                             />
                                         </Form.Group>
-                                        <Form.Group className="mb-3">
-                                            <Form.Label>Password</Form.Label>
+                                        <Form.Group controlId="questioner_password" className="mb-3">
+                                            <Form.Label column="questioner_password">Password</Form.Label>
                                             <Form.Control
-                                                name="password"
+                                                name="questioner_password"
                                                 type="password"
                                                 placeholder="Create a password"
                                                 required

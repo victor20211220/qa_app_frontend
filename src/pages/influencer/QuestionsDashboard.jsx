@@ -1,12 +1,15 @@
 import React, {useEffect, useState} from 'react';
 import axios from '../../utils/axios.js';
-import {Row, Col, Card, Spinner, Button, Dropdown, DropdownButton, Container, Form} from 'react-bootstrap';
+import {Row, Col, Spinner, Button, Container} from 'react-bootstrap';
 import {toast} from 'react-toastify';
 import InfluencerQuestionCard from '../../components/influencer/InfluencerQuestionCard.jsx';
 import StatsCard from "../../components/StatsCard.jsx";
 import TableCard from "../../components/TableCard.jsx";
 import {questionStatusFilterOptions} from "../../utils/helpers.js";
 import CustomSelect from "../../components/CustomSelect.jsx";
+
+// Remove "Not Paid" question filter option in the filters dropdown for answerer.
+const filteredQuestionStatusOptions = questionStatusFilterOptions.filter(opt => opt.value !== 3);
 
 const QuestionsDashboard = () => {
     const [stats, setStats] = useState(null);
@@ -46,11 +49,6 @@ const QuestionsDashboard = () => {
         } finally {
             setLoading(false);
         }
-    };
-
-    const handleFilterChange = (value) => {
-        setPage(1); // reset to first page
-        setStatus(value);
     };
 
     const formatCurrency = (num) => `$${Number(num || 0).toLocaleString()}`;
@@ -112,8 +110,8 @@ const QuestionsDashboard = () => {
                         </Col>
                         <Col xs="auto">
                             <CustomSelect
-                                options={questionStatusFilterOptions}
-                                value={questionStatusFilterOptions.find(opt => opt.value === status)}
+                                options={filteredQuestionStatusOptions}
+                                value={filteredQuestionStatusOptions.find(opt => opt.value === status)}
                                 onChange={(selected) => {
                                     setStatus(selected.value);
                                     setPage(1);

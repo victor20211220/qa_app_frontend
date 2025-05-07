@@ -5,15 +5,10 @@ import {getAvatar} from "../../utils/helpers.js";
 import {Link} from "react-router-dom";
 import ClickableLink from "../ClickableLink.jsx";
 import TimeAgo from "../TimeAgo.jsx";
+import {questionStatusBadgeOptions} from "../../utils/helpers.js";
 
 const InfluencerQuestionCard = ({question}) => {
     const {questioner, created_at, question: questionText, status, answer} = question;
-
-    const statusLabel = {
-        0: {text: 'Pending', variant: 'warning'},
-        1: {text: 'Answered', variant: 'success'},
-        2: {text: 'Expired', variant: 'secondary'},
-    };
 
     return (
         <ClickableLink to={`/influencer/view-question?question_id=${question._id}`}>
@@ -32,8 +27,8 @@ const InfluencerQuestionCard = ({question}) => {
                                 <h6 className="fw-semibold text-dark mb-0">{questioner.name}</h6>
                                 <TimeAgo dateValue={created_at}/>
                             </div>
-                            <Badge bg={statusLabel[status].variant} className="rounded-pill fw-medium px-3 py-2">
-                                {statusLabel[status].text}
+                            <Badge bg={questionStatusBadgeOptions[status].variant} className="rounded-pill fw-medium px-3 py-2">
+                                {questionStatusBadgeOptions[status].text}
                             </Badge>
                         </div>
                         <p className="text-374151 mb-3">{questionText}</p>
