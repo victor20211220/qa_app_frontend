@@ -1,6 +1,9 @@
 import React, {useState} from 'react';
 import {toast} from "react-toastify";
 import {Button, Image} from "react-bootstrap";
+import {uploadMaxFileSize} from "../../utils/helpers.js";
+
+const MAX_FILE_SIZE = Number( uploadMaxFileSize ) * 1024 * 1024; // MB → bytes
 
 const ImageUploader = ({files = [], setFiles, maxFiles, readonly = false}) => {
     const [isDragging, setIsDragging] = useState(false);
@@ -8,6 +11,13 @@ const ImageUploader = ({files = [], setFiles, maxFiles, readonly = false}) => {
 
     const handleFiles = (e) => {
         const newFiles = Array.from(e.target.files);
+
+        const oversized = newFiles.find(f => f.size > MAX_FILE_SIZE);
+        if (oversized) {
+            toast.error(`File "${oversized.name}" is too large. Max size is ${uploadMaxFileSize}MB.`);
+            return;
+        }
+
         if (files.length + newFiles.length > maxFiles) {
             toast.error(`You can only upload up to ${maxFiles} images.`);
             return;
@@ -26,6 +36,13 @@ const ImageUploader = ({files = [], setFiles, maxFiles, readonly = false}) => {
         dragCounter.current = 0;
         setIsDragging(false); // reset on drop
         const droppedFiles = Array.from(e.dataTransfer.files);
+
+        const oversized = droppedFiles.find(f => f.size > MAX_FILE_SIZE);
+        if (oversized) {
+            toast.error(`File "${oversized.name}" is too large. Max size is ${uploadMaxFileSize}MB.`);
+            return;
+        }
+
         if (files.length + droppedFiles.length > maxFiles) {
             toast.error(`You can only upload up to ${maxFiles} images.`);
             return;
@@ -67,7 +84,7 @@ const ImageUploader = ({files = [], setFiles, maxFiles, readonly = false}) => {
                         onDragLeave={handleDragLeave}
                     >
                         <div><i className="fa-solid fa-camera"></i> Drag images here or click to upload</div>
-                        <div className="text-muted small">Max {maxFiles} images</div>
+                        <div className="text-muted small">Max {maxFiles} images, max {uploadMaxFileSize}MB each</div>
                     </label>
                     <input
                         id="file-upload"

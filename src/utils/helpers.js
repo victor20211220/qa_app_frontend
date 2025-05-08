@@ -21,4 +21,6 @@ export const questionStatusBadgeOptions = {
     3: {text: 'Not Paid', variant: 'danger'},
 };
 
+export const uploadMaxFileSize = import.meta.env.VITE_UPLOAD_MAX_FILESIZE;
+
 export {getAvatar, viewInfluencerLink};
