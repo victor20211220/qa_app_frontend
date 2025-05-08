@@ -1,7 +1,7 @@
 import React from 'react';
-import {Card, Button, Image} from 'react-bootstrap';
+import {Button, Image} from 'react-bootstrap';
 import {Link} from 'react-router-dom';
-import {getAvatar} from "../../utils/helpers.js";
+import {getAvatar, viewInfluencerLink} from "../../utils/helpers.js";
 
 const formatRating = (rating, reviews) => {
     const formatted = reviews > 999 ? `${(reviews / 1000).toFixed(1)}k` : reviews;
@@ -10,7 +10,6 @@ const formatRating = (rating, reviews) => {
 
 const formatResponseTime = (hours) => `Avg. response time: ${Math.round(hours)} hours`;
 const formatQuestionStat = (n) => (n > 999 ? `${Math.floor(n / 1000)}k+` : n) + ' questions answered';
-const formatPrice = (price) => `$${price}`;
 
 const InfluencerCard = ({influencer}) => {
     return (
@@ -33,7 +32,7 @@ const InfluencerCard = ({influencer}) => {
                         </div>
 
                         <div className="d-flex gap-2 mt-3 mt-md-0">
-                            <Button as={Link} to={`/questioner/view-influencer?answerer_id=${influencer._id}`}
+                            <Button as={Link} to={viewInfluencerLink(influencer._id)}
                                     variant="primary">
                                 Ask
                             </Button>

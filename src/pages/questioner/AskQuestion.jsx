@@ -1,9 +1,9 @@
 import React, {useEffect, useState} from 'react';
-import {useNavigate, useSearchParams} from 'react-router-dom';
+import {useSearchParams} from 'react-router-dom';
 import axios from '../../utils/axios';
 import {Button, Card, Container, Form, Image, Spinner} from 'react-bootstrap';
 import {toast} from 'react-toastify';
-import {getAvatar, viewInfluencerLink} from '../../utils/helpers.js';
+import {getAvatar} from '../../utils/helpers.js';
 import ImageUploader from '../../components/questioner/ImageUploader';
 import BackButton from "../../components/BackButton.jsx";
 import InfluencerRecentReviews from "../../components/questioner/RecentReviews.jsx";
@@ -23,9 +23,6 @@ const AskQuestion = () => {
         readonly: false,
     });
     const [loading, setLoading] = useState(false);
-
-
-    const navigate = useNavigate();
 
     const typeMap = ['Text Question', 'Multiple Choice Question', 'Picture Question'];
 
@@ -118,9 +115,10 @@ const AskQuestion = () => {
 
                         <Form>
                             {/* Question Textarea */}
-                            <Form.Group className="mb-4">
-                                <Form.Label className="fw-medium text-muted">Your Question</Form.Label>
+                            <Form.Group controlId="question" className="mb-4">
+                                <Form.Label column="question" className="fw-medium text-muted">Your Question</Form.Label>
                                 <Form.Control
+                                    name="question"
                                     as="textarea"
                                     rows={5}
                                     placeholder=""
@@ -133,7 +131,7 @@ const AskQuestion = () => {
 
                             {questionType.type === 1 && (
                                 <div className="mb-4">
-                                    <Form.Label className="fw-medium text-muted mb-2 d-block">Answer
+                                    <Form.Label column="" className="fw-medium text-muted mb-2 d-block">Answer
                                         Options(upto {questionType.number_of_choice_options})</Form.Label>
                                     {formData.choices.map((c, idx) => (
                                         <div key={idx} className="d-flex mb-3">

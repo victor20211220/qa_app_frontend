@@ -16,6 +16,7 @@ import InfluencerDashboard from './pages/influencer/InfluencerDashboard.jsx';
 import EditInfluencerProfile from "./pages/influencer/EditInfluencerProfile.jsx";
 import QuestionsDashboard from "./pages/influencer/QuestionsDashboard.jsx";
 import AnswererViewQuestion from "./pages/influencer/AnswererViewQuestion.jsx";
+import Withdrawal from "./pages/influencer/Withdrawal.jsx";
 
 import QuestionerLayout from './layouts/QuestionerLayout';
 import EditQuestionerProfile from "./pages/questioner/EditQuestionerProfile.jsx";
@@ -27,6 +28,7 @@ import QuestionerViewQuestion from "./pages/questioner/QuestionerViewQuestion.js
 import MyQuestions from "./pages/questioner/MyQuestions.jsx";
 import QuestionerForgotPassword from "./pages/questioner/QuestionerForgotPassword.jsx";
 import WithTitle from "./components/WithTitle.jsx";
+import ListWithdrawals from "./pages/ListWithdrawals.jsx";
 
 
 const DashboardRouter = () => {
@@ -45,6 +47,8 @@ const publicRoutes = [
     {path: '/reset-password', title: 'Reset Password', component: ResetPassword},
     {path: '/answerer-forgot-password', title: 'Forgot Password (Influencer)', component: AnswererForgotPassword},
     {path: '/questioner-forgot-password', title: 'Forgot Password (User)', component: QuestionerForgotPassword},
+    {path: '/view-influencer', title: 'View Influencer', component: ViewInfluencer},
+    {path: '/list-withdrawals', title: 'List withdrawals', component: ListWithdrawals},
     // Add more as needed
 ];
 const answererRoutes = [
@@ -52,13 +56,13 @@ const answererRoutes = [
     {path: 'edit-profile', title: 'Edit Profile', component: EditInfluencerProfile},
     {path: 'questions', title: 'My Questions', component: QuestionsDashboard},
     {path: 'view-question', title: 'View Question', component: AnswererViewQuestion},
+    {path: 'withdrawal', title: 'Withdrawal', component: Withdrawal},
 ];
 
 const questionerRoutes = [
     {path: '', title: 'User Dashboard', component: QuestionerDashboard},
     {path: 'edit-profile', title: 'Edit Profile', component: EditQuestionerProfile},
     {path: 'browse-influencers', title: 'Browse Influencers', component: BrowseInfluencers},
-    {path: 'view-influencer', title: 'View Influencer', component: ViewInfluencer},
     {path: 'ask-question', title: 'Ask Question', component: AskQuestion},
     {path: 'view-question', title: 'View Question', component: QuestionerViewQuestion},
     {path: 'my-questions', title: 'My Questions', component: MyQuestions},

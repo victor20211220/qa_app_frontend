@@ -3,7 +3,7 @@ const getAvatar = (photo = null) => {
 };
 
 const viewInfluencerLink = (id) => {
-    return `/questioner/view-influencer?answerer_id=${id}`
+    return `/view-influencer?answerer_id=${id}`
 }
 
 export const questionStatusFilterOptions = [

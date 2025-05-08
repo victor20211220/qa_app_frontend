@@ -1,14 +1,15 @@
 import React, {useEffect, useState} from 'react';
 import {Link, useSearchParams} from 'react-router-dom';
 import {Card, Col, Row, Button, Image, Spinner, Container} from 'react-bootstrap';
+import {OverlayTrigger, Tooltip} from 'react-bootstrap'; // at the top
 import axios from '../../utils/axios.js';
 import InfluencerRecentReviews from '../../components/questioner/RecentReviews.jsx';
-import {getAvatar} from "../../utils/helpers.js";
+import {getAvatar, viewInfluencerLink} from "../../utils/helpers.js";
+import {useAppContext} from "../../context/AppContext.jsx";
 
 const ViewInfluencer = () => {
     const [searchParams] = useSearchParams();
     const [data, setData] = useState(null);
-
     const id = searchParams.get('answerer_id');
 
     useEffect(() => {
@@ -34,6 +35,18 @@ const ViewInfluencer = () => {
     const formatQuestionStat = (n) => (n > 999 ? `${Math.floor(n / 1000)}k+` : n) + ' questions answered';
 
     const formatPrice = (price) => `$${price}`;
+
+
+    const [copied, setCopied] = useState(false);
+    const handleShare = () => {
+        const link = window.location.origin + viewInfluencerLink(data._id);
+        navigator.clipboard.writeText(link);
+        setCopied(true);
+        setTimeout(() => setCopied(false), 2000);
+    };
+
+    const {userType, user} = useAppContext();
+    const isSelfUser = userType === 'answerer' && !!user && user._id === id;
 
     if (!data) return <Spinner animation="border"/>;
 
@@ -62,7 +75,20 @@ const ViewInfluencer = () => {
                                 <div className="d-flex gap-2 mt-md-0">
                                     <div className="d-flex justify-content-end gap-3">
                                         <Button variant="primary">Follow</Button>
-                                        <Button variant="outline-light" className="rounded-pill">Share</Button>
+                                        <OverlayTrigger
+                                            placement="top"
+                                            overlay={
+                                                <Tooltip id="share-tooltip">{copied ? 'Copied!' : 'Copy link'}</Tooltip>
+                                            }
+                                        >
+                                            <Button
+                                                variant="outline-light"
+                                                className="rounded-pill"
+                                                onClick={handleShare}
+                                            >
+                                                Share
+                                            </Button>
+                                        </OverlayTrigger>
                                     </div>
                                 </div>
                             </div>
@@ -143,8 +169,15 @@ const ViewInfluencer = () => {
                                                 </li>
                                             ))}
                                         </ul>
-                                        <Button as={Link}
-                                                to={`/questioner/ask-question?answerer_id=${data._id}&question_type_id=${q._id}`}>
+                                        <Button
+                                            as={Link}
+                                            to={isSelfUser ? '#' : `/questioner/ask-question?answerer_id=${data._id}&question_type_id=${q._id}`}
+                                            onClick={(e) => {
+                                                if (isSelfUser) {
+                                                    e.preventDefault(); // stops navigation
+                                                }
+                                            }}
+                                        >
                                             {q.type === 0
                                                 ? 'Ask Question'
                                                 : q.type === 1

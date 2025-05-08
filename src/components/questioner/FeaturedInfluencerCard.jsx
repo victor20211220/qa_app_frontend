@@ -1,7 +1,7 @@
 import React from 'react';
 import {Card, Button, Image, Col} from 'react-bootstrap';
 import {Link} from 'react-router-dom';
-import {getAvatar} from "../../utils/helpers.js";
+import {getAvatar, viewInfluencerLink} from "../../utils/helpers.js";
 
 const formatRating = (rating, reviews) => {
     const formatted = reviews > 999 ? `${(reviews / 1000).toFixed(1)}k` : reviews;
@@ -30,7 +30,7 @@ const FeaturedInfluencerCard = ({influencer}) => {
                             </span>
                         </div>
                     </div>
-                    <Button as={Link} to={`/questioner/view-influencer?answerer_id=${influencer._id}`}
+                    <Button as={Link} to={viewInfluencerLink(influencer._id)}
                             variant="primary">
                         Ask
                     </Button>

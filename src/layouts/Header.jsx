@@ -1,7 +1,7 @@
 import {Button, Dropdown, Image, Nav} from 'react-bootstrap';
 import {Link} from 'react-router-dom';
 import {useAppContext} from '../context/AppContext.jsx';
-import {getAvatar} from '../utils/helpers.js';
+import {getAvatar, viewInfluencerLink} from '../utils/helpers.js';
 import Container from 'react-bootstrap/Container';
 import Navbar from 'react-bootstrap/Navbar';
 
@@ -45,7 +45,6 @@ const publicLinks = [
 
 const Header = () => {
     const {logout, userType, user} = useAppContext();
-
     const isQuestioner = userType === 'questioner';
     const isLoggedIn = !!user;
     const links = isLoggedIn ? (isQuestioner ? questionerLinks : influencerLinks) : publicLinks;
@@ -67,7 +66,7 @@ const Header = () => {
                     <Navbar.Collapse id="navbarScroll">
                         <Nav className="mx-auto">
                             {
-                                links.map((link, index) => {
+                                links.map((link) => {
                                     return <Nav.Link as={Link} to={link.to}>{link.title}</Nav.Link>
                                 })
                             }
@@ -95,6 +94,13 @@ const Header = () => {
                                     <Dropdown.Item as={Link}
                                                    to={(isQuestioner ? `/questioner/edit-profile` : `/influencer/edit-profile`)}>Edit
                                         Profile</Dropdown.Item>
+                                    {!isQuestioner &&
+                                        <>
+                                            <Dropdown.Item as={Link} to={viewInfluencerLink(user._id)}>View
+                                                Profile</Dropdown.Item>
+                                            <Dropdown.Item as={Link} to={`/influencer/withdrawal`}>Withdrawal</Dropdown.Item>
+                                        </>
+                                    }
                                     <Dropdown.Divider/>
                                     <Dropdown.Item onClick={logout}>Logout</Dropdown.Item>
                                 </Dropdown.Menu>
