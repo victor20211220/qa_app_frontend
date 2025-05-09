@@ -38,12 +38,48 @@ const ViewInfluencer = () => {
 
 
     const [copied, setCopied] = useState(false);
+    const [showTooltip, setShowTooltip] = useState(false);
+
     const handleShare = () => {
         const link = window.location.origin + viewInfluencerLink(data._id);
-        navigator.clipboard.writeText(link);
-        setCopied(true);
-        setTimeout(() => setCopied(false), 2000);
+
+        // Modern Clipboard API (HTTPS or localhost)
+        if (navigator.clipboard && window.isSecureContext) {
+            navigator.clipboard.writeText(link)
+                .then(() => {
+                    setCopied(true);
+                    setTimeout(() => setCopied(false), 2000);
+                })
+                .catch((err) => {
+                    console.error('Clipboard write failed:', err);
+                    fallbackCopy(link);
+                });
+        } else {
+            fallbackCopy(link);
+        }
     };
+
+    const fallbackCopy = (text) => {
+        const textarea = document.createElement('textarea');
+        textarea.value = text;
+        textarea.style.position = 'fixed'; // prevent scroll
+        textarea.style.opacity = '0';
+        document.body.appendChild(textarea);
+        textarea.focus();
+        textarea.select();
+
+        try {
+            document.execCommand('copy');
+            setCopied(true);
+            setTimeout(() => setCopied(false), 2000);
+        } catch (err) {
+            console.error('Fallback copy failed:', err);
+            alert('Copy failed');
+        }
+
+        document.body.removeChild(textarea);
+    };
+
 
     const {userType, user} = useAppContext();
     const isSelfUser = userType === 'answerer' && !!user && user._id === id;
@@ -77,6 +113,7 @@ const ViewInfluencer = () => {
                                         <Button variant="primary">Follow</Button>
                                         <OverlayTrigger
                                             placement="top"
+                                            show={showTooltip}
                                             overlay={
                                                 <Tooltip id="share-tooltip">{copied ? 'Copied!' : 'Copy link'}</Tooltip>
                                             }
@@ -85,6 +122,8 @@ const ViewInfluencer = () => {
                                                 variant="outline-light"
                                                 className="rounded-pill"
                                                 onClick={handleShare}
+                                                onMouseEnter={() => setShowTooltip(true)}
+                                                onMouseLeave={() => setShowTooltip(false)}
                                             >
                                                 Share
                                             </Button>
