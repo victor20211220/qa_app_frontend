@@ -81,7 +81,6 @@ const EditQuestion = () => {
             payload.append('question_type_id', questionTypeId);
             if (questionType.type === 1) payload.append('choices', JSON.stringify(formData.choices));
             if (questionType.type === 2) {
-                debugger;
                 formData.pictures.forEach((pic) => {
                     if (pic.existing) {
                         payload.append('pictures_existing', pic.preview);
