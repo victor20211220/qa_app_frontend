@@ -8,11 +8,11 @@ import ImageUploader from '../../components/questioner/ImageUploader';
 import BackButton from "../../components/BackButton.jsx";
 import InfluencerRecentReviews from "../../components/questioner/RecentReviews.jsx";
 
-const AskQuestion = () => {
+const EditQuestion = () => {
     const [searchParams] = useSearchParams();
-
     const answererId = searchParams.get('answerer_id');
     const questionTypeId = searchParams.get('question_type_id');
+    const questionId = searchParams.get('question_id');
 
     const [answerer, setAnswerer] = useState(null);
     const [questionType, setQuestionType] = useState(null);
@@ -33,6 +33,16 @@ const AskQuestion = () => {
                 setAnswerer(res.data);
                 const selected = res.data.questionTypes.find(q => q._id === questionTypeId);
                 setQuestionType(selected);
+
+                const res1 = await axios.get(`/questions/${questionId}`);
+                const questionRow = res1.data;
+                setFormData({
+                    ...formData,
+                    question: questionRow.question,
+                    choices: questionRow.choices || [],
+                    pictures: questionRow.pictures.map(p => ({preview: p, existing: true}))
+                })
+
             } catch {
                 toast.error('Failed to load data');
             }
@@ -63,26 +73,28 @@ const AskQuestion = () => {
         setFormData({...formData, readonly: true});
     };
 
-    const handlePayment = async () => {
+    const handleSave = async () => {
         try {
             setLoading(true); // disable the button
             const payload = new FormData();
             payload.append('question', formData.question);
-            payload.append('answerer_id', answererId);
             payload.append('question_type_id', questionTypeId);
-            payload.append('price', questionType.price);
             if (questionType.type === 1) payload.append('choices', JSON.stringify(formData.choices));
             if (questionType.type === 2) {
-                formData.pictures.forEach(p => payload.append('pictures', p));
+                debugger;
+                formData.pictures.forEach((pic) => {
+                    if (pic.existing) {
+                        payload.append('pictures_existing', pic.preview);
+                    } else {
+                        payload.append('pictures', pic);
+                    }
+                });
             }
-            const res = await axios.post('/questions', payload);
-            if(res.data.id){
-                const res1 = await axios.get(`/questions/${res.data.id}/stripe-session`);
-                window.location.href = res1.data.url; // Redirect to Stripe
-            }
-        } catch {
-            toast.error('Failed to submit');
-            setLoading(false); // re-enable on error
+            await axios.put(`/questions/${questionId}`, payload);
+            toast.success('Question updated!');
+            window.location.href = `/questioner/view-question?question_id=${questionId}`;
+        } catch (err) {
+            toast.error('Failed to update question');
         }
     };
 
@@ -96,7 +108,7 @@ const AskQuestion = () => {
                 <div className="col-lg-8 offset-lg-2">
                     <div className="d-flex align-items-center gap-3 mb-4">
                         <BackButton/>
-                        <h1 className="h4 fw-bold text-dark mb-0">Ask {label}</h1>
+                        <h1 className="h4 fw-bold text-dark mb-0">Edit {label}</h1>
                     </div>
                     <Card className="p-5 rounded-4 shadow-lg border border-light-subtle bg-white">
                         {/* Header */}
@@ -117,7 +129,8 @@ const AskQuestion = () => {
                         <Form>
                             {/* Question Textarea */}
                             <Form.Group controlId="question" className="mb-4">
-                                <Form.Label column="question" className="fw-medium text-muted">Your Question</Form.Label>
+                                <Form.Label column="question" className="fw-medium text-muted">Your
+                                    Question</Form.Label>
                                 <Form.Control
                                     name="question"
                                     as="textarea"
@@ -206,8 +219,8 @@ const AskQuestion = () => {
                                             >
                                                 Edit Question
                                             </Button>
-                                            <Button onClick={handlePayment} className="flex-fill" disabled={loading}>
-                                                {loading ? 'Confirming...' : 'Confirm & Pay'}</Button>
+                                            <Button onClick={handleSave} className="flex-fill" disabled={loading}>
+                                                {loading ? 'Saving...' : 'Save'}</Button>
                                         </div>
                                     </>
                                 ) : (
@@ -224,4 +237,4 @@ const AskQuestion = () => {
     );
 };
 
-export default AskQuestion;
+export default EditQuestion;

@@ -29,6 +29,7 @@ import MyQuestions from "./pages/questioner/MyQuestions.jsx";
 import QuestionerForgotPassword from "./pages/questioner/QuestionerForgotPassword.jsx";
 import WithTitle from "./components/WithTitle.jsx";
 import ListWithdrawals from "./pages/ListWithdrawals.jsx";
+import EditQuestion from "./pages/questioner/EditQuestion.jsx";
 
 
 const DashboardRouter = () => {
@@ -65,6 +66,7 @@ const questionerRoutes = [
     {path: 'browse-influencers', title: 'Browse Influencers', component: BrowseInfluencers},
     {path: 'ask-question', title: 'Ask Question', component: AskQuestion},
     {path: 'view-question', title: 'View Question', component: QuestionerViewQuestion},
+    {path: 'edit-question', title: 'Edit Question', component: EditQuestion},
     {path: 'my-questions', title: 'My Questions', component: MyQuestions},
 ];
 

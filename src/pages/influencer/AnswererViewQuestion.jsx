@@ -7,6 +7,7 @@ import {getAvatar} from '../../utils/helpers';
 import {Rating} from '@smastrom/react-rating';
 import '@smastrom/react-rating/style.css';
 import BackButton from "../../components/BackButton.jsx";
+import ImageGridGallery from "../../components/ImageGridGallery.jsx";
 
 const AnswererViewQuestion = () => {
     const [searchParams] = useSearchParams();
@@ -78,43 +79,33 @@ const AnswererViewQuestion = () => {
 
                     {/* Question Section */}
                     <div className="mb-4">
-                        <Form.Group>
-                            <Form.Label>Question:</Form.Label>
+                        <Form.Group className="mb-3">
+                            <Form.Label column="">Question:</Form.Label>
                             <Form.Control as="textarea" value={question.question} disabled rows={5}/>
                         </Form.Group>
 
                         {type === 1 && (
-                            <div className="mt-3">
-                                <Form.Label>Choices:</Form.Label>
+                            <Form.Group className="mb-3">
+                                <Form.Label column="">Choices:</Form.Label>
                                 <ul>
                                     {question.choices.map((choice, idx) => (
                                         <li key={idx}>{choice}</li>
                                     ))}
                                 </ul>
-                            </div>
+                            </Form.Group>
                         )}
 
-                        {type === 2 && (
-                            <div className="mt-3">
-                                <Form.Label>Pictures:</Form.Label>
-                                <div className="d-flex flex-wrap gap-3">
-                                    {question.pictures.map((pic, i) => (
-                                        <Image
-                                            key={i}
-                                            src={`${import.meta.env.VITE_BACKEND_URL}/${pic}`}
-                                            width={120}
-                                            height={120}
-                                            className="rounded shadow-sm"
-                                        />
-                                    ))}
-                                </div>
-                            </div>
+                        {type === 2 && question.pictures.length > 0 && (
+                            <Form.Group className="mb-3">
+                                <Form.Label column="">Pictures:</Form.Label>
+                                <ImageGridGallery pictures={question.pictures}/>
+                            </Form.Group>
                         )}
                     </div>
 
                     {/* Answer Section */}
-                    <div className="mb-3">
-                        <Form.Label>My Answer:</Form.Label>
+                    <Form.Group className="mb-3">
+                        <Form.Label column="">My Answer:</Form.Label>
                         <Form.Control
                             as="textarea"
                             rows={5}
@@ -122,7 +113,7 @@ const AnswererViewQuestion = () => {
                             onChange={(e) => setAnswer(e.target.value)}
                             disabled={isAnswered}
                         />
-                    </div>
+                    </Form.Group>
 
                     {!isAnswered && (
                         <Button onClick={handleSubmit}>Submit Answer</Button>

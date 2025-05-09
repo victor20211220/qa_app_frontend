@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {toast} from "react-toastify";
 import {Button, Image} from "react-bootstrap";
-import {uploadMaxFileSize} from "../../utils/helpers.js";
+import {getAvatar, uploadMaxFileSize} from "../../utils/helpers.js";
 
 const MAX_FILE_SIZE = Number( uploadMaxFileSize ) * 1024 * 1024; // MB → bytes
 
@@ -100,15 +100,9 @@ const ImageUploader = ({files = [], setFiles, maxFiles, readonly = false}) => {
             <div className="d-flex flex-wrap gap-3">
                 {files.map((file, index) => (
                     <div key={index}
-                         className={`position-relative image-upload-tile ${!readonly && "p-3 border border-2 border-dashed"} rounded-4`}
-                         style={{
-                             width: '220px',
-                             height: '220px',
-                             flex: '0 0 auto',
-                         }}
-                    >
+                         className={`position-relative image-upload-tile ${!readonly && "p-3 border border-2 border-dashed"} rounded-4`}>
                         <Image
-                            src={URL.createObjectURL(file)}
+                            src={file.existing ? getAvatar(file.preview) : URL.createObjectURL(file)}
                             alt={`preview-${index}`}
                             width={100}
                             height={100}

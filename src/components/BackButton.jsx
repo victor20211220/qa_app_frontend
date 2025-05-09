@@ -1,15 +1,14 @@
 import {Button} from 'react-bootstrap';
-import {useNavigate} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 
-const BackButton = () => {
-    const navigate = useNavigate();
-
+const BackButton = ({to = ""}) => {
     return (
         <Button
             variant="link"
             className="text-muted p-0 d-flex align-items-center"
             style={{fontSize: '1.25rem'}}
-            onClick={() => navigate(-1)}
+            as={Link}
+            to={to !== "" ? to: -1}
         >
             <i className="fa-solid fa-arrow-left"></i>
         </Button>

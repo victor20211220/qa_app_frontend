@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {useSearchParams} from 'react-router-dom';
+import {useNavigate, useSearchParams} from 'react-router-dom';
 import axios from '../../utils/axios';
 import {Form, Button, Image, Spinner, Container, Card} from 'react-bootstrap';
 import {Rating} from '@smastrom/react-rating';
@@ -7,9 +7,11 @@ import '@smastrom/react-rating/style.css';
 import {toast} from 'react-toastify';
 import {getAvatar} from "../../utils/helpers.js";
 import BackButton from "../../components/BackButton.jsx";
+import ImageGridGallery from "../../components/ImageGridGallery.jsx";
 
 const QuestionerViewQuestion = () => {
     const [searchParams] = useSearchParams();
+    const navigate = useNavigate();
     const questionId = searchParams.get('question_id');
     const [question, setQuestion] = useState(null);
     const [rate, setRate] = useState(0);
@@ -48,6 +50,22 @@ const QuestionerViewQuestion = () => {
         }
     };
 
+    const [paying, setPaying] = useState(false);
+    const handlePayment = async () => {
+        try {
+            setPaying(true); // disable the button
+            const res = await axios.get(`/questions/${questionId}/stripe-session`);
+            window.location.href = res.data.url; // Redirect to Stripe
+        } catch {
+            toast.error('Failed to submit');
+            setLoading(false); // re-enable on error
+        }
+    };
+
+    const goToEditQuestionPage = () => {
+        navigate(`/questioner/edit-question?answerer_id=${question.answerer_id._id}&question_type_id=${question.question_type_id._id}&question_id=${question._id}`);
+    }
+
     if (loading) return <Spinner animation="border"/>;
     if (!question) return null;
 
@@ -55,26 +73,27 @@ const QuestionerViewQuestion = () => {
     const typeLabel = ['Text', 'Multiple Choice', 'Pictures'][type];
 
     const alreadyReviewed = question.answer?.rate !== undefined || question.answer?.review;
-    const hasAnswer = question.answer !== null
+    const hasAnswer = question.answer !== null;
+
 
     return (
         <Container className="py-5">
             <div className="col-lg-8 offset-lg-2">
                 <div className="d-flex align-items-center gap-3 mb-4">
-                    <BackButton/>
-                    <h2 className="mb-0 pb-2">{hasAnswer && !alreadyReviewed ? "Review Answer" : "View Question"}</h2>
+                    <BackButton to={`/questioner/my-questions`}/>
+                    <h2 className="mb-0">{hasAnswer && !alreadyReviewed ? "Review Answer" : "View Question"}</h2>
                 </div>
                 <Card className="p-4 rounded-4 border border-light-subtle bg-white mb-4">
 
                     {/* Question */}
                     <Form.Group className="mb-3">
-                        <Form.Label>Your {typeLabel} Question:</Form.Label>
+                        <Form.Label column="">Your {typeLabel} Question:</Form.Label>
                         <Form.Control as="textarea" rows={5} value={question.question} disabled/>
                     </Form.Group>
 
                     {type === 1 && question.choices.length > 0 && (
                         <>
-                            <Form.Label>Choices:</Form.Label>
+                            <Form.Label column="">Choices:</Form.Label>
                             <ul>
                                 {question.choices.map((choice, idx) => (
                                     <li key={idx}>{choice}</li>
@@ -84,25 +103,15 @@ const QuestionerViewQuestion = () => {
                     )}
 
                     {type === 2 && question.pictures.length > 0 && (
-                        <>
-                            <Form.Label>Pictures:</Form.Label>
-                            <div className="d-flex flex-wrap gap-3 mb-3">
-                                {question.pictures.map((pic, i) => (
-                                    <Image
-                                        key={i}
-                                        src={getAvatar(pic)}
-                                        width={120}
-                                        height={120}
-                                        className="rounded shadow-sm"
-                                    />
-                                ))}
-                            </div>
-                        </>
+                        <Form.Group className="mb-3">
+                            <Form.Label column="">Pictures:</Form.Label>
+                            <ImageGridGallery pictures={question.pictures}/>
+                        </Form.Group>
                     )}
 
                     {/* Answer */}
                     <div className="mb-4">
-                        <div className="d-flex align-items-center mb-2">
+                        <div className="d-flex align-items-center mb-3">
                             <Image
                                 src={getAvatar(question.answerer_id.photo)}
                                 width={48}
@@ -116,8 +125,19 @@ const QuestionerViewQuestion = () => {
                             </div>
                         </div>
 
+                        {[0, 3].indexOf(question.status) !== -1 &&
+                            <div className="d-flex align-items-center gap-3">
+                                <Button disabled={paying} onClick={goToEditQuestionPage} className="flex-fill">Edit
+                                    Question</Button>
+                                {question.status === 3 &&
+                                    <Button className="flex-fill" disabled={paying} onClick={handlePayment}>Pay
+                                        Question</Button>
+                                }
+                            </div>
+                        }
+
                         {hasAnswer && <>
-                            <Form.Label>Answer:</Form.Label>
+                            <Form.Label column="">Answer:</Form.Label>
                             <Form.Control as="textarea" rows={5} value={question.answer.answer} disabled/>
                             <small
                                 className="text-muted">{new Date(question.answer.created_at).toLocaleString()}</small>
@@ -129,7 +149,7 @@ const QuestionerViewQuestion = () => {
                         {/* Review Form */}
 
                         <Form.Group className="mb-3">
-                            <Form.Label>Rate:</Form.Label>
+                            <Form.Label column="">Rate:</Form.Label>
                             <div>
                                 <Rating
                                     style={{maxWidth: 160}}
@@ -141,7 +161,7 @@ const QuestionerViewQuestion = () => {
                         </Form.Group>
 
                         <Form.Group className="mb-4">
-                            <Form.Label>Review:</Form.Label>
+                            <Form.Label column="">Review:</Form.Label>
                             <Form.Control
                                 as="textarea"
                                 rows={5}

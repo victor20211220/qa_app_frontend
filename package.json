@@ -23,7 +23,8 @@
     "react-simple-star-rating": "^5.1.7",
     "react-tag-input-component": "^2.0.2",
     "react-toastify": "^11.0.5",
-    "sweetalert2": "^11.17.2"
+    "sweetalert2": "^11.17.2",
+    "yet-another-react-lightbox": "^3.23.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.21.0",

@@ -24,10 +24,10 @@ const MyQuestions = () => {
         const payment = searchParams.get('payment');
         if (payment) {
             if (payment === "success") {
-                toast.success('Question created!');
+                toast.success('Payment successful!');
             }
             if (payment === "cancel") {
-                toast.error("Question create failed!");
+                toast.error("Payment failed!");
             }
             window.history.replaceState({}, '', window.location.pathname);
         }
