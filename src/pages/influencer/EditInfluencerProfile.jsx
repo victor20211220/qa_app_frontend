@@ -7,6 +7,7 @@ import Educations from '../../components/influencer/Educations.jsx';
 import {getAvatar} from "../../utils/helpers.js";
 import CustomFileInput from "../../components/CustomFileInput.jsx";
 import CreatableSelect from 'react-select/creatable';
+import CustomSelect from "../../components/CustomSelect.jsx";
 
 const customStyles = {
     control: (base) => ({
@@ -54,6 +55,11 @@ const EditInfluencerProfile = () => {
     const [expertise, setExpertise] = useState([]);
     const [photoPreview, setPhotoPreview] = useState('');
     const [photoFile, setPhotoFile] = useState(null);
+    const [categories, setCategories] = useState([]);
+    const categoryOptions = categories.map((c) => ({
+        value: c._id,
+        label: c.category,
+    }));
 
     useEffect(() => {
         fetchProfile();
@@ -68,6 +74,7 @@ const EditInfluencerProfile = () => {
                 youtube: res.data.youtube || '',
                 tiktok: res.data.tiktok || '',
                 bio: res.data.bio || '',
+                category_id: res.data.category_id || '',
             });
             setExpertise(res.data.expertise || []);
             setPhotoPreview(getAvatar(res.data.photo) || '');
@@ -75,6 +82,10 @@ const EditInfluencerProfile = () => {
             toast.error('Failed to load profile');
         }
     };
+
+    useEffect(() => {
+        axios.get('/categories').then((res) => setCategories(res.data));
+    }, []);
 
     const handleChange = (e) => {
         const {name, value} = e.target;
@@ -99,6 +110,7 @@ const EditInfluencerProfile = () => {
         try {
             const formData = new FormData();
             formData.append('name', form.name);
+            formData.append('category_id', form.category_id);
             formData.append('instagram', form.instagram);
             formData.append('youtube', form.youtube);
             formData.append('tiktok', form.tiktok);
@@ -138,16 +150,37 @@ const EditInfluencerProfile = () => {
                                 )}
                                 <CustomFileInput handlePhotoChange={handlePhotoChange}/>
                             </Form.Group>
-
-                            <Form.Group controlId="name" className="mb-3 col-lg-6">
-                                <Form.Label column="name">Full Name *</Form.Label>
-                                <Form.Control
-                                    name="name"
-                                    value={form.name}
-                                    onChange={handleChange}
-                                    required
-                                />
-                            </Form.Group>
+                            <Row className="g-3 mb-4">
+                                <Col md={6}>
+                                    <Form.Group controlId="name">
+                                        <Form.Label column="name">Full Name *</Form.Label>
+                                        <Form.Control
+                                            name="name"
+                                            value={form.name}
+                                            onChange={handleChange}
+                                            required
+                                        />
+                                    </Form.Group>
+                                </Col>
+                                <Col md={6}>
+                                    <Form.Group controlId="category_id">
+                                        <Form.Label column="category_id">Category</Form.Label>
+                                        <CustomSelect
+                                            name="category_id"
+                                            options={categoryOptions}
+                                            value={categoryOptions.find((opt) => opt.value === form.category_id)}
+                                            onChange={(selected) =>
+                                                setForm((prev) => ({
+                                                    ...prev,
+                                                    category_id: selected?.value || ''
+                                                }))
+                                            }
+                                            placeholder="Select your expertise"
+                                            isClearable
+                                        />
+                                    </Form.Group>
+                                </Col>
+                            </Row>
                             <div className="mb-3 pb-3"></div>
                             <h2 className="text-20 fw-bold mb-4">Expertise & Rates</h2>
                             <Form.Group controlId="expertise" className="mb-3">

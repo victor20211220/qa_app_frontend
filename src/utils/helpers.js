@@ -22,5 +22,6 @@ export const questionStatusBadgeOptions = {
 };
 
 export const uploadMaxFileSize = import.meta.env.VITE_UPLOAD_MAX_FILESIZE;
+export const API_URL = import.meta.env.VITE_API_URL;
 
 export {getAvatar, viewInfluencerLink};

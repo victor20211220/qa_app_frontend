@@ -5,6 +5,7 @@ import {useNavigate, useSearchParams, Link} from 'react-router-dom';
 import axios from '../utils/axios';
 import {toast} from 'react-toastify';
 import CustomSelect from "../components/CustomSelect.jsx";
+import {API_URL} from "../utils/helpers.js";
 
 const Register = () => {
     const [searchParams] = useSearchParams();
@@ -38,7 +39,7 @@ const Register = () => {
 
     useEffect(() => {
         if (key === 'influencer') {
-            axios.get('/categories').then((res) => setCategories(res.data));
+            axios.get('/categories').then((res) => setCategories([...res.data, {_id: null, category: 'Choose later'}]));
         }
     }, [key]);
 
@@ -131,14 +132,15 @@ const Register = () => {
                                                         }
                                                         placeholder="Select your expertise"
                                                         isClearable
-                                                        required={true}
                                                     />
                                                 </Form.Group>
                                             </Col>
                                             <Col md={6}>
                                                 <h2 className="mb-4">Social Presence</h2>
                                                 <Form.Group controlId="instagram" className="mb-3">
-                                                    <Form.Label column="instagram"><i className="fa-brands fa-instagram me-2"></i>Instagram Username</Form.Label>
+                                                    <Form.Label column="instagram"><i
+                                                        className="fa-brands fa-instagram me-2"></i>Instagram
+                                                        Username</Form.Label>
                                                     <Form.Control
                                                         name="instagram"
                                                         type="text"
@@ -148,7 +150,9 @@ const Register = () => {
                                                     />
                                                 </Form.Group>
                                                 <Form.Group controlId="youtube" className="mb-3">
-                                                    <Form.Label column="youtube"><i className="fa-brands fa-youtube me-2"></i>Youtube Channel</Form.Label>
+                                                    <Form.Label column="youtube"><i
+                                                        className="fa-brands fa-youtube me-2"></i>Youtube
+                                                        Channel</Form.Label>
                                                     <Form.Control
                                                         name="youtube"
                                                         type="url"
@@ -158,7 +162,9 @@ const Register = () => {
                                                     />
                                                 </Form.Group>
                                                 <Form.Group controlId="tiktok" className="mb-3">
-                                                    <Form.Label column="tiktok"><i className="fa-brands fa-tiktok me-2"></i>TikTok Username</Form.Label>
+                                                    <Form.Label column="tiktok"><i
+                                                        className="fa-brands fa-tiktok me-2"></i>TikTok
+                                                        Username</Form.Label>
                                                     <Form.Control
                                                         name="tiktok"
                                                         type="text"
@@ -178,11 +184,20 @@ const Register = () => {
                                             onChange={(e) => setAgreedInfluencer(e.target.checked)}
                                             required
                                         />
+
+                                        <Button
+                                            type="button"
+                                            variant="danger"
+                                            className="mb-3 w-100 rounded-3"
+                                            onClick={() => window.location.href = `${API_URL}/auth/google/answerer`}>
+                                            <i className="fa-brands fa-google me-2"></i> Connect with Google
+                                        </Button>
                                         <Button variant="primary" type="submit" className="w-100 rounded-3">
                                             Create Influencer Account
                                         </Button>
                                         <div className="mt-3 text-center">
-                                            Already have an account? <Link to="/login" className="text-primary">Sign in</Link>
+                                            Already have an account? <Link to="/login" className="text-primary">Sign
+                                            in</Link>
                                         </div>
                                     </Form>
                                 </Card.Body>
@@ -200,9 +215,9 @@ const Register = () => {
                                     <Form onSubmit={handleSubmit}>
                                         <h2>User Information</h2>
                                         <Form.Group controlId="questioner_name" className="mb-3">
-                                            <Form.Label column="questioner_name">Full Name</Form.Label>
+                                            <Form.Label column="">Full Name</Form.Label>
                                             <Form.Control
-                                                name="questioner_name"
+                                                name="name"
                                                 type="text"
                                                 placeholder="Enter your full name"
                                                 required
@@ -211,9 +226,9 @@ const Register = () => {
                                             />
                                         </Form.Group>
                                         <Form.Group controlId="questioner_email" className="mb-3">
-                                            <Form.Label column="questioner_email">Email Address</Form.Label>
+                                            <Form.Label column="">Email Address</Form.Label>
                                             <Form.Control
-                                                name="questioner_email"
+                                                name="email"
                                                 type="email"
                                                 placeholder="Enter your email"
                                                 required
@@ -222,9 +237,9 @@ const Register = () => {
                                             />
                                         </Form.Group>
                                         <Form.Group controlId="questioner_password" className="mb-3">
-                                            <Form.Label column="questioner_password">Password</Form.Label>
+                                            <Form.Label column="">Password</Form.Label>
                                             <Form.Control
-                                                name="questioner_password"
+                                                name="password"
                                                 type="password"
                                                 placeholder="Create a password"
                                                 required
@@ -241,11 +256,19 @@ const Register = () => {
                                             onChange={(e) => setAgreedUser(e.target.checked)}
                                             required
                                         />
+                                        <Button
+                                            type="button"
+                                            variant="danger"
+                                            className="mb-3 w-100 rounded-3"
+                                            onClick={() => window.location.href = `${API_URL}/auth/google/questioner`}>
+                                            <i className="fa-brands fa-google me-2"></i> Connect with Google
+                                        </Button>
                                         <Button variant="primary" type="submit" className="w-100 rounded-3">
                                             Create User Account
                                         </Button>
                                         <div className="mt-3 text-center">
-                                            Already have an account? <Link to="/login" className="text-primary">Sign in</Link>
+                                            Already have an account? <Link to="/login" className="text-primary">Sign
+                                            in</Link>
                                         </div>
                                     </Form>
                                 </Card.Body>

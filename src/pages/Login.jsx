@@ -5,6 +5,7 @@ import {Link, useNavigate} from 'react-router-dom';
 import axios from '../utils/axios';
 import {toast} from 'react-toastify';
 import {useAppContext} from '../context/AppContext';
+import {API_URL} from "../utils/helpers.js";
 
 const Login = () => {
     const navigate = useNavigate();
@@ -64,9 +65,16 @@ const Login = () => {
                                     Access your influencer dashboard
                                 </p>
                             </div>
+                            <Button
+                                type="button"
+                                variant="danger"
+                                className="mb-3 w-100 rounded-3"
+                                onClick={() => window.location.href = `${API_URL}/auth/google/answerer`}>
+                                <i className="fa-brands fa-google me-2"></i> Login with Google
+                            </Button>
                             <Form onSubmit={(e) => handleSubmit(e, true)}>
-                                <Form.Group className="mb-3">
-                                    <Form.Label>Email</Form.Label>
+                                <Form.Group controlId="email" className="mb-3">
+                                    <Form.Label column="email">Email</Form.Label>
                                     <Form.Control
                                         type="email"
                                         name="email"
@@ -76,8 +84,8 @@ const Login = () => {
                                         onChange={(e) => handleChange(e, true)}
                                     />
                                 </Form.Group>
-                                <Form.Group className="mb-3">
-                                    <Form.Label>Password</Form.Label>
+                                <Form.Group controlId="password" className="mb-3">
+                                    <Form.Label column="password">Password</Form.Label>
                                     <Form.Control
                                         type="password"
                                         name="password"
@@ -120,9 +128,16 @@ const Login = () => {
                                     Connect with your favorite influencers
                                 </p>
                             </div>
+                            <Button
+                                type="button"
+                                variant="danger"
+                                className="mb-3 w-100 rounded-3"
+                                onClick={() => window.location.href = `${API_URL}/auth/google/questioner`}>
+                                <i className="fa-brands fa-google me-2"></i> Login with Google
+                            </Button>
                             <Form onSubmit={(e) => handleSubmit(e, false)}>
-                                <Form.Group className="mb-3">
-                                    <Form.Label>Email</Form.Label>
+                                <Form.Group controlId="user_email" className="mb-3">
+                                    <Form.Label column="">Email</Form.Label>
                                     <Form.Control
                                         type="email"
                                         name="email"
@@ -132,8 +147,8 @@ const Login = () => {
                                         onChange={(e) => handleChange(e, false)}
                                     />
                                 </Form.Group>
-                                <Form.Group className="mb-3">
-                                    <Form.Label>Password</Form.Label>
+                                <Form.Group controlId="user_password" className="mb-3">
+                                    <Form.Label column="">Password</Form.Label>
                                     <Form.Control
                                         type="password"
                                         name="password"
