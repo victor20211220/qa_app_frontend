@@ -192,6 +192,13 @@ const Register = () => {
                                             onClick={() => window.location.href = `${API_URL}/auth/google/answerer`}>
                                             <i className="fa-brands fa-google me-2"></i> Connect with Google
                                         </Button>
+                                        <Button
+                                            type="button"
+                                            variant="info"
+                                            className="mb-3 w-100 rounded-3"
+                                            onClick={() => window.location.href = `${API_URL}/auth/facebook/answerer`}>
+                                            <i className="fa-brands fa-facebook me-2"></i> Connect with Facebook
+                                        </Button>
                                         <Button variant="primary" type="submit" className="w-100 rounded-3">
                                             Create Influencer Account
                                         </Button>
