@@ -5,8 +5,6 @@ import {
     Form,
     Row,
     Col,
-    ToggleButtonGroup,
-    ToggleButton,
     Card
 } from 'react-bootstrap';
 import axios from '../../utils/axios.js';
@@ -63,8 +61,8 @@ const QuestionTypeSettingsModal = ({show, onClose, answererId}) => {
         try {
             for (const t of types) {
                 if (t.enabled) {
-                    if (!t.price || Number(t.price) <= 0) {
-                        toast.error(`${t.label}: Price must be greater than 0`);
+                    if (!t.price || Number(t.price) < 0.5) {
+                        toast.error(`${t.label}: Price must be greater than 0.5`);
                         setSubmitting(false);
                         return;
                     }
@@ -137,7 +135,7 @@ const QuestionTypeSettingsModal = ({show, onClose, answererId}) => {
 
                         {q.type !== 0 && (
                             <Form.Group className="d-block d-lg-flex align-items-center gap-3 mb-4">
-                                <Form.Label className="fw-medium text-muted mb-0">
+                                <Form.Label column="" className="fw-medium text-muted mb-0">
                                     Number of {q.type === 1 ? 'choices' : 'options'}:
                                 </Form.Label>
                                 <div className="d-flex gap-2 flex-wrap">
@@ -167,8 +165,8 @@ const QuestionTypeSettingsModal = ({show, onClose, answererId}) => {
 
                         <Row>
                             <Col md={6}>
-                                <Form.Group className="mb-3">
-                                    <Form.Label>Fixed price ($)</Form.Label>
+                                <Form.Group controlId={`price_${idx}`} className="mb-3">
+                                    <Form.Label column="">Fixed price ($)</Form.Label>
                                     <Form.Control
                                         type="number"
                                         value={q.price}
@@ -179,8 +177,8 @@ const QuestionTypeSettingsModal = ({show, onClose, answererId}) => {
                                 </Form.Group>
                             </Col>
                             <Col md={6}>
-                                <Form.Group className="mb-3">
-                                    <Form.Label>Response time (hours)</Form.Label>
+                                <Form.Group controlId={`response_time_${idx}`} className="mb-3">
+                                    <Form.Label column="">Response time (hours)</Form.Label>
                                     <Form.Control
                                         type="number"
                                         value={q.response_time}
