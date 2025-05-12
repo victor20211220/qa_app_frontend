@@ -5,7 +5,7 @@ import {Link, useNavigate} from 'react-router-dom';
 import axios from '../utils/axios';
 import {toast} from 'react-toastify';
 import {useAppContext} from '../context/AppContext';
-import {API_URL} from "../utils/helpers.js";
+import {API_URL, FACEBOOK_CLIENT_ID} from "../utils/helpers.js";
 
 const Login = () => {
     const navigate = useNavigate();
@@ -72,6 +72,13 @@ const Login = () => {
                                 onClick={() => window.location.href = `${API_URL}/auth/google/answerer`}>
                                 <i className="fa-brands fa-google me-2"></i> Login with Google
                             </Button>
+                            <Button
+                                type="button"
+                                variant="info"
+                                className="mb-3 w-100 rounded-3"
+                                onClick={() => window.location.href = `https://www.facebook.com/v19.0/dialog/oauth?client_id=${FACEBOOK_CLIENT_ID}&redirect_uri=${API_URL}/auth/facebook/callback/answerer&scope=email,public_profile`}>
+                                <i className="fa-brands fa-facebook me-2"></i> Login with Facebook
+                            </Button>
                             <Form onSubmit={(e) => handleSubmit(e, true)}>
                                 <Form.Group controlId="email" className="mb-3">
                                     <Form.Label column="email">Email</Form.Label>
@@ -134,6 +141,13 @@ const Login = () => {
                                 className="mb-3 w-100 rounded-3"
                                 onClick={() => window.location.href = `${API_URL}/auth/google/questioner`}>
                                 <i className="fa-brands fa-google me-2"></i> Login with Google
+                            </Button>
+                            <Button
+                                type="button"
+                                variant="info"
+                                className="mb-3 w-100 rounded-3"
+                                onClick={() => window.location.href = `https://www.facebook.com/v19.0/dialog/oauth?client_id=${FACEBOOK_CLIENT_ID}&redirect_uri=${API_URL}/auth/facebook/callback/questioner&scope=email,public_profile`}>
+                                <i className="fa-brands fa-facebook me-2"></i> Login with Facebook
                             </Button>
                             <Form onSubmit={(e) => handleSubmit(e, false)}>
                                 <Form.Group controlId="user_email" className="mb-3">

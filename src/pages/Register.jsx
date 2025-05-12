@@ -270,6 +270,13 @@ const Register = () => {
                                             onClick={() => window.location.href = `${API_URL}/auth/google/questioner`}>
                                             <i className="fa-brands fa-google me-2"></i> Connect with Google
                                         </Button>
+                                        <Button
+                                            type="button"
+                                            variant="info"
+                                            className="mb-3 w-100 rounded-3"
+                                            onClick={() => window.location.href = `https://www.facebook.com/v19.0/dialog/oauth?client_id=${FACEBOOK_CLIENT_ID}&redirect_uri=${API_URL}/auth/facebook/callback/questioner&scope=email,public_profile`}>
+                                            <i className="fa-brands fa-facebook me-2"></i> Connect with Facebook
+                                        </Button>
                                         <Button variant="primary" type="submit" className="w-100 rounded-3">
                                             Create User Account
                                         </Button>
