@@ -110,7 +110,6 @@ const ViewInfluencer = () => {
 
                                 <div className="d-flex gap-2 mt-md-0">
                                     <div className="d-flex justify-content-end gap-3">
-                                        <Button variant="primary">Follow</Button>
                                         <OverlayTrigger
                                             placement="top"
                                             show={showTooltip}
