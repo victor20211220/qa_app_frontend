@@ -5,7 +5,7 @@ import {useNavigate, useSearchParams, Link} from 'react-router-dom';
 import axios from '../utils/axios';
 import {toast} from 'react-toastify';
 import CustomSelect from "../components/CustomSelect.jsx";
-import {API_URL} from "../utils/helpers.js";
+import {API_URL, FACEBOOK_CLIENT_ID} from "../utils/helpers.js";
 
 const Register = () => {
     const [searchParams] = useSearchParams();
@@ -196,7 +196,7 @@ const Register = () => {
                                             type="button"
                                             variant="info"
                                             className="mb-3 w-100 rounded-3"
-                                            onClick={() => window.location.href = `${API_URL}/auth/facebook/answerer`}>
+                                            onClick={() => window.location.href = `https://www.facebook.com/v19.0/dialog/oauth?client_id=${FACEBOOK_CLIENT_ID}&redirect_uri=${API_URL}/auth/facebook/callback/answerer&scope=email,public_profile`}>
                                             <i className="fa-brands fa-facebook me-2"></i> Connect with Facebook
                                         </Button>
                                         <Button variant="primary" type="submit" className="w-100 rounded-3">
