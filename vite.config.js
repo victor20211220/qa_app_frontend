@@ -5,12 +5,11 @@ export default defineConfig({
   plugins: [react()],
   server: {
     proxy: {
-      '/external': {
+      '/introduction': {
         target: 'https://youmentorme-m6lzj4bpgzcgmgw8.builder-preview.com/',
         changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/external/, ''),
+        rewrite: (path) => path.replace(/^\/introduction/, ''),
       },
     },
   },
 });
-
