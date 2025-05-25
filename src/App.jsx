@@ -8,7 +8,7 @@ import Register from './pages/Register';
 import VerifyEmail from "./pages/VerifyEmail.jsx";
 import Login from './pages/Login';
 import Home from './pages/Home';
-import Intro from './pages/Intro.jsx';
+import Intro from './pages/Introduction.jsx';
 import ResetPassword from "./pages/ResetPassword.jsx";
 
 import AnswererForgotPassword from "./pages/influencer/AnswererForgotPassword.jsx";
