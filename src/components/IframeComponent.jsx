@@ -16,12 +16,27 @@ const IframeComponent = ({ url }) => {
         }
     };
 
+    const handleResize = () => {
+        const iframe = iframeRef.current;
+        if (iframe) {
+            // Recalculate height when window is resized
+            handleIframeLoad();
+        }
+    };
+
     // Adjust iframe height on initial render and after loading
     useEffect(() => {
         const iframe = iframeRef.current;
         if (iframe) {
             iframe.onload = handleIframeLoad;
         }
+        // Add resize event listener
+        window.addEventListener('resize', handleResize);
+
+        // Cleanup resize event listener on component unmount
+        return () => {
+            window.removeEventListener('resize', handleResize);
+        };
     }, []);
 
     return (
