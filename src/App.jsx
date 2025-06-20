@@ -33,7 +33,8 @@ import ListWithdrawals from "./pages/ListWithdrawals.jsx";
 import EditQuestion from "./pages/questioner/EditQuestion.jsx";
 import {VISITED_MENTOR_PROFILE_KEY} from "./utils/helpers.js";
 import {useEffect} from "react";
-import HowItWorks from "./pages/HowItWorks.jsx";
+import HowItWorks1 from "./pages/HowItWorks1.jsx";
+import HowItWorks2 from "./pages/HowItWorks2.jsx";
 
 
 const DashboardRouter = () => {
@@ -67,7 +68,8 @@ const publicRoutes = [
     {path: '/view-mentor', title: 'View Mentor', component: ViewInfluencer},
     {path: '/list-withdrawals', title: 'List withdrawals', component: ListWithdrawals},
     {path: '/introduction', title: 'Introduction', component: Intro},
-    {path: '/how-it-works', title: 'How It Works', component: HowItWorks},
+    {path: '/how-it-works1', title: 'How It Works', component: HowItWorks1},
+    {path: '/how-it-works2', title: 'How It Works', component: HowItWorks2},
 
     // Add more as needed
 ];

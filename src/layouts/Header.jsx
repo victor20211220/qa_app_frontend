@@ -15,7 +15,7 @@ const influencerLinks = [
         to: "/mentor/questions", title: "Questions",
     },
     {
-        to: "/", title: "Analytics",
+        to: "/how-it-works1", title: "How it works",
     },
 ];
 
@@ -27,24 +27,15 @@ const questionerLinks = [
         to: "/questioner/my-questions", title: "My Questions",
     },
     {
-        to: "/", title: "Support ",
+        to: "/how-it-works2", title: "How it works",
     },
 ]
-const publicLinks = [
-    {
-        to: "/", title: "Home",
-    },
-    {
-        to: "/how-it-works", title: "How it works",
-    }
-]
-
 
 const Header = () => {
     const {logout, userType, user} = useAppContext();
     const isQuestioner = userType === 'questioner';
     const isLoggedIn = !!user;
-    const links = isLoggedIn ? (isQuestioner ? questionerLinks : influencerLinks) : publicLinks;
+    const links = isLoggedIn ? (isQuestioner ? questionerLinks : influencerLinks) : [];
 
     return (
         <header>
@@ -61,11 +52,26 @@ const Header = () => {
 
                     <Navbar.Toggle aria-controls="navbarScroll"/>
                     <Navbar.Collapse id="navbarScroll">
-                        <Nav className="mx-auto">
+                        <Nav className="mx-auto align-items-center">
                             {
-                                links.map((link) => {
-                                    return <Nav.Link as={Link} to={link.to}>{link.title}</Nav.Link>
-                                })
+                                isLoggedIn ? (
+                                    links.map((link) => {
+                                        return <Nav.Link as={Link} to={link.to}>{link.title}</Nav.Link>
+                                    })
+                                ) : <>
+                                    <Nav.Link as={Link} to="/">Home</Nav.Link>
+                                    <Dropdown align="end">
+                                        <Dropdown.Toggle variant="light"
+                                                         className="d-flex align-items-center gap-2 border-0 bg-white pe-0">
+                                            <Nav.Link>How it works</Nav.Link>
+                                            <i className="fas fa-chevron-down ms-2 text-muted"/>
+                                        </Dropdown.Toggle>
+                                        <Dropdown.Menu>
+                                            <Dropdown.Item as={Link} to="/how-it-works1">Mentor</Dropdown.Item>
+                                            <Dropdown.Item as={Link} to="/how-it-works2">User</Dropdown.Item>
+                                        </Dropdown.Menu>
+                                    </Dropdown>
+                                </>
                             }
                         </Nav>
                         {isLoggedIn ? (
@@ -95,7 +101,8 @@ const Header = () => {
                                         <>
                                             <Dropdown.Item as={Link} to={viewInfluencerLink(user._id)}>View
                                                 Profile</Dropdown.Item>
-                                            <Dropdown.Item as={Link} to={`/mentor/withdrawal`}>Withdrawal</Dropdown.Item>
+                                            <Dropdown.Item as={Link}
+                                                           to={`/mentor/withdrawal`}>Withdrawal</Dropdown.Item>
                                         </>
                                     }
                                     <Dropdown.Divider/>
