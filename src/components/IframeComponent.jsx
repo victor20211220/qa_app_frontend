@@ -11,6 +11,7 @@ const IframeComponent = ({ url }) => {
             const doc = iframe.contentDocument || iframe.contentWindow.document;
             const contentHeight = doc.body.scrollHeight;
             setHeight(contentHeight + 'px');
+            console.log(contentHeight);
         } catch (err) {
             console.error('Unable to access iframe content:', err);
         }
