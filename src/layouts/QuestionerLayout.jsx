@@ -15,7 +15,7 @@ const QuestionerLayout = () => {
                 setUser({...res.data, type: 'questioner'});
             } catch {
                 toast.error('Session expired');
-                logout();
+                logout(1);
                 navigate('/login');
             }
         };

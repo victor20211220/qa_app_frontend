@@ -11,7 +11,7 @@ const Footer = () => {
                 <Row>
                     <Col lg={3}>
                         <Link to="/">
-                            <img src={footerLogoImage} alt=""/>
+                            <img src={footerLogoImage} alt="" height="50"/>
                         </Link>
                         <div className="mb-3 pb-3"></div>
                         <p className="text-secondary text-14">Connect with influencers and get expert answers to your

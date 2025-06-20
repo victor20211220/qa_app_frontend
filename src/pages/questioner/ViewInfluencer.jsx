@@ -1,16 +1,31 @@
 import React, {useEffect, useState} from 'react';
-import {Link, useSearchParams} from 'react-router-dom';
+import {Link, useNavigate, useSearchParams} from 'react-router-dom';
 import {Card, Col, Row, Button, Image, Spinner, Container} from 'react-bootstrap';
 import {OverlayTrigger, Tooltip} from 'react-bootstrap'; // at the top
 import axios from '../../utils/axios.js';
 import InfluencerRecentReviews from '../../components/questioner/RecentReviews.jsx';
-import {getAvatar, viewInfluencerLink} from "../../utils/helpers.js";
+import {getAvatar, viewInfluencerLink, VISITED_MENTOR_PROFILE_KEY} from "../../utils/helpers.js";
 import {useAppContext} from "../../context/AppContext.jsx";
 
 const ViewInfluencer = () => {
     const [searchParams] = useSearchParams();
+    const navigate = useNavigate();
     const [data, setData] = useState(null);
     const id = searchParams.get('answerer_id');
+
+    const {userType, user, setUser} = useAppContext();
+    useEffect(() => {
+        if(userType !== "questioner") return;
+        const fetch = async () => {
+            try {
+                const res = await axios.get('/questioners/me');
+                setUser({...res.data, type: 'questioner'});
+            } catch {
+
+            }
+        };
+        fetch();
+    }, [userType]);
 
     useEffect(() => {
         if (id) fetchData();
@@ -81,8 +96,19 @@ const ViewInfluencer = () => {
     };
 
 
-    const {userType, user} = useAppContext();
     const isSelfUser = userType === 'answerer' && !!user && user._id === id;
+    const handleAskQuestionClick = (data, q) => {
+        if (isSelfUser) return;
+        if (!userType) {
+            console.log('set it')
+            sessionStorage.setItem(
+                VISITED_MENTOR_PROFILE_KEY,
+                location.pathname + location.search + location.hash
+            );
+        }
+
+        navigate(`/questioner/ask-question?answerer_id=${data._id}&question_type_id=${q._id}`);
+    };
 
     if (!data) return <Spinner animation="border"/>;
 
@@ -209,11 +235,9 @@ const ViewInfluencer = () => {
                                         </ul>
                                         <Button
                                             as={Link}
-                                            to={isSelfUser ? '#' : `/questioner/ask-question?answerer_id=${data._id}&question_type_id=${q._id}`}
                                             onClick={(e) => {
-                                                if (isSelfUser) {
-                                                    e.preventDefault(); // stops navigation
-                                                }
+                                                e.preventDefault(); // stops navigation
+                                                handleAskQuestionClick(data, q);
                                             }}
                                         >
                                             {q.type === 0

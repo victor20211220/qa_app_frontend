@@ -57,7 +57,7 @@ const Header = () => {
                         <img
                             alt=""
                             src={logoImage}
-                            width="100"
+                            height="50"
                             className="d-inline-block align-top"
                         />
                     </Navbar.Brand>

@@ -1,4 +1,4 @@
-import {Routes, Route, Navigate} from 'react-router-dom';
+import {Routes, Route, Navigate, useNavigate} from 'react-router-dom';
 import {AppProvider, useAppContext} from './context/AppContext';
 import {ToastContainer} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -31,10 +31,24 @@ import QuestionerForgotPassword from "./pages/questioner/QuestionerForgotPasswor
 import WithTitle from "./components/WithTitle.jsx";
 import ListWithdrawals from "./pages/ListWithdrawals.jsx";
 import EditQuestion from "./pages/questioner/EditQuestion.jsx";
+import {VISITED_MENTOR_PROFILE_KEY} from "./utils/helpers.js";
+import {useEffect} from "react";
 
 
 const DashboardRouter = () => {
     const {userToken, userType} = useAppContext();
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        if (userToken && userType === 'questioner') {
+            const visitedUrl = sessionStorage.getItem(VISITED_MENTOR_PROFILE_KEY);
+            if (visitedUrl) {
+                sessionStorage.removeItem(VISITED_MENTOR_PROFILE_KEY);
+                navigate(visitedUrl);
+            }
+        }
+    }, [userToken, userType, navigate]);
+
     if (!userToken) return <Home/>;
     if (userType === 'answerer') return <Navigate to="/influencer"/>;
     if (userType === 'questioner') return <Navigate to="/questioner"/>;

@@ -1,6 +1,7 @@
 // src/context/AppContext.js
 import {createContext, useContext, useState, useEffect} from 'react';
 import {useNavigate} from 'react-router-dom';
+import {VISITED_MENTOR_PROFILE_KEY} from "../utils/helpers.js";
 
 const AppContext = createContext();
 
@@ -37,12 +38,15 @@ export const AppProvider = ({children}) => {
         }
     };
 
-    const logout = () => {
+    const logout = (isQuestioner = 0) => {
+        const visitedUrl = sessionStorage.getItem(VISITED_MENTOR_PROFILE_KEY);
         setUserToken(null);
         setUserType(null);
         setUser(null);
         localStorage.clear();
         sessionStorage.clear();
+        if (isQuestioner && visitedUrl) sessionStorage.setItem(VISITED_MENTOR_PROFILE_KEY, visitedUrl);
+
         navigate('/');
     };
 
