@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {Row, Col, Card, Button, Image, Container} from 'react-bootstrap';
+import {Row, Col, Card, Image, Container} from 'react-bootstrap';
 import axios from '../../utils/axios';
 import {toast} from 'react-toastify';
 import {Link} from 'react-router-dom';
@@ -23,13 +23,6 @@ const QuestionerDashboard = () => {
             toast.error('Failed to load dashboard data');
         }
     };
-
-    const formatRating = (rating, reviews) => {
-        const formatted = reviews > 999 ? `${(reviews / 1000).toFixed(1)}k` : reviews;
-        return `⭐ ${rating.toFixed(1)} (${formatted} reviews)`;
-    };
-
-    const formatPrice = (price) => `$${price}/question`;
 
     if (!data) return null;
 

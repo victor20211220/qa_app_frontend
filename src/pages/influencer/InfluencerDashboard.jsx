@@ -1,14 +1,12 @@
 import {useEffect, useState} from 'react';
-import {Container, Row, Col, Button, Image, Card} from 'react-bootstrap';
-import {useAppContext} from '../../context/AppContext.jsx';
+import {Container, Row, Col, Button, Card} from 'react-bootstrap';
 import axios from '../../utils/axios.js'
-import {Link, useNavigate} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import {toast} from 'react-toastify';
 import QuestionTypeSettingsModal from '../../components/influencer/QuestionTypeSettingsModal.jsx';
 import StatsCard from "../../components/StatsCard.jsx";
 
 const InfluencerDashboard = () => {
-    const navigate = useNavigate();
     const [influencer, setInfluencer] = useState(null);
     const [showModal, setShowModal] = useState(false);
 

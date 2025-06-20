@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {Row, Col, Form, Button, Spinner, Container} from 'react-bootstrap';
+import {Col, Form, Button, Spinner, Container} from 'react-bootstrap';
 import axios from '../../utils/axios';
 import {toast} from 'react-toastify';
 import {useSearchParams} from 'react-router-dom';
