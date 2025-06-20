@@ -32,13 +32,7 @@ const questionerLinks = [
 ]
 const publicLinks = [
     {
-        to: "/", title: "How it works"
-    },
-    {
-        to: "/", title: "Features"
-    },
-    {
-        to: "/", title: "Success Stories"
+        to: "/how-it-works", title: "How it works"
     },
 ]
 
