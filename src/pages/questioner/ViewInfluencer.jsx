@@ -36,7 +36,7 @@ const ViewInfluencer = () => {
             const res = await axios.get(`/answerers/${id}`);
             setData(res.data);
         } catch (err) {
-            console.error('Failed to load influencer');
+            console.error('Failed to load mentor');
         }
     };
 
@@ -120,7 +120,7 @@ const ViewInfluencer = () => {
                         className="d-flex flex-column flex-md-row gap-4 align-items-center align-items-md-start p-lg-2 mb-4">
                         <Image
                             src={getAvatar(data.photo)}
-                            alt="Influencer"
+                            alt="Mentor"
                             roundedCircle
                             width={128}
                             height={128}

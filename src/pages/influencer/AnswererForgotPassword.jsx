@@ -24,7 +24,7 @@ const AnswererForgotPassword = () => {
             <Card className="col-lg-6 offset-lg-3">
                 <Form onSubmit={handleSubmit}>
                     <Form.Group controlId="email" className="mb-3">
-                        <Form.Label>Forgot Password (Influencer)</Form.Label>
+                        <Form.Label>Forgot Password (Mentor)</Form.Label>
                         <Form.Control
                             name="email"
                             type="email"

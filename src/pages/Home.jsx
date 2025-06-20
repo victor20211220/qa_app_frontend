@@ -21,7 +21,7 @@ const Home = () => {
 
         if (token && type) {
             login(token, type, true); // save to localStorage
-            navigate(type === 'answerer' ? '/influencer' : '/questioner');
+            navigate(type === 'answerer' ? '/mentor' : '/questioner');
             toast.success('Login successful!');
         } else {
         }
@@ -31,7 +31,7 @@ const Home = () => {
         <>
             <Container className="py-5">
                 <div className="text-center">
-                    <h1 className="col-12 col-lg-7 mx-auto">Connect with Influencers, Get Expert Answers</h1>
+                    <h1 className="col-12 col-lg-7 mx-auto">Connect with Mentors, Get Expert Answers</h1>
                     <p className="text-20 mb-0">The platform where knowledge meets opportunity. Choose your path
                         below.</p>
                     <div className="mb-5 pb-3"></div>
@@ -45,7 +45,7 @@ const Home = () => {
                                     <i className="fa-solid fa-star text-primary text-36"></i>
                                 </div>
                                 <div className="text-center">
-                                    <h2 className="mb-4">I'm an Influencer</h2>
+                                    <h2 className="mb-4">I'm an Mentor</h2>
                                     <p className="mb-4">Share your expertise and earn money by answering questions from
                                         your
                                         audience</p>
@@ -64,8 +64,8 @@ const Home = () => {
                                 </div>
                                 <div className="mb-3"></div>
                                 <Button variant="primary" className="d-block" as={Link}
-                                        to={`/register?role=influencer`}>Join as
-                                    Influencer</Button>
+                                        to={`/register?role=mentor`}>Join as
+                                    Mentor</Button>
                             </Card.Body>
                         </Card>
                     </Col>
@@ -79,7 +79,7 @@ const Home = () => {
                                 <div className="text-center">
                                     <h2 className="mb-4">I Want to Ask Questions</h2>
                                     <p className="mb-4">
-                                        Get personalized answers from your favorite influencers and experts
+                                        Get personalized answers from your favorite mentors and experts
                                     </p>
                                 </div>
                                 <div className="mb-3">
@@ -105,7 +105,7 @@ const Home = () => {
             </Container>
             <div className="text-center bg-f9fafb py-5">
                 <div className="py-5">
-                    <p className="text-18 mb-5">Trusted by leading influencers and brands</p>
+                    <p className="text-18 mb-5">Trusted by leading mentors and brands</p>
                     <div className="d-block d-lg-flex justify-content-center align-items-center">
                         <img src={youtubeImage} alt="" className="me-5"/>
                         <img src={instagramImage} alt="" className="me-5"/>

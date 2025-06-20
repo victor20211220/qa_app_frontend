@@ -38,14 +38,14 @@ const QuestionerDashboard = () => {
             <section id="categories" className="mb-5">
                 <div className="d-flex justify-content-between align-items-center mb-4">
                     <h2 className="h4 fw-bold text-dark">Popular Categories</h2>
-                    <Link to="/questioner/browse-influencers" className="text-primary fw-medium cursor-pointer">View
+                    <Link to="/questioner/browse-mentors" className="text-primary fw-medium cursor-pointer">View
                         All</Link>
                 </div>
 
                 <Row className="g-3">
                     {data.popular_categories.map((cat) => (
                         <Col xs={6} md={3} lg={2} key={cat.id}>
-                            <ClickableLink to={`/questioner/browse-influencers?category_id=${cat._id}`}>
+                            <ClickableLink to={`/questioner/browse-mentors?category_id=${cat._id}`}>
                                 <div
                                     className="text-center p-3 bg-white border rounded-4 h-100 cursor-pointer category-card"
                                 >
@@ -62,7 +62,7 @@ const QuestionerDashboard = () => {
             </section>
 
             <section id="featured-influencers" className="mb-5">
-                <h2 className="h4 fw-bold text-dark mb-4">Featured Influencers</h2>
+                <h2 className="h4 fw-bold text-dark mb-4">Featured Mentors</h2>
                 <Row className="g-4">
                     {data.featured_answerers.map((inf) => (
                         <FeaturedInfluencerCard influencer={inf} key={inf._id}/>

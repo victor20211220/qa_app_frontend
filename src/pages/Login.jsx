@@ -45,7 +45,7 @@ const Login = () => {
         <Container className="py-5">
             <div className="d-flex justify-content-center align-items-center gap-2 mb-4">
                 <Button variant="primary">
-                    <i className="fa-solid fa-star text-white me-2"></i>Influencer Login
+                    <i className="fa-solid fa-star text-white me-2"></i>Mentor Login
                 </Button>
                 <Button variant="info">
                     <i className="fa-solid fa-user text-white me-2"></i>User Login
@@ -60,9 +60,9 @@ const Login = () => {
                                 <i className="fa-solid fa-star text-primary text-36"></i>
                             </div>
                             <div className="text-center">
-                                <h2 className="mb-2">Influencer Login</h2>
+                                <h2 className="mb-2">Mentor Login</h2>
                                 <p className="mb-4">
-                                    Access your influencer dashboard
+                                    Access your mentor dashboard
                                 </p>
                             </div>
                             <Button
@@ -132,7 +132,7 @@ const Login = () => {
                             <div className="text-center">
                                 <h2 className="mb-2">User Login</h2>
                                 <p className="mb-4">
-                                    Connect with your favorite influencers
+                                    Connect with your favorite mentors
                                 </p>
                             </div>
                             <Button
@@ -193,7 +193,7 @@ const Login = () => {
                 </Col>
             </Row>
             <div className="mt-3 text-center">
-                Don't have an account? <Link to="/register?role=influencer" className="text-primary">Sign up</Link>
+                Don't have an account? <Link to="/register?role=mentor" className="text-primary">Sign up</Link>
             </div>
         </Container>
     );

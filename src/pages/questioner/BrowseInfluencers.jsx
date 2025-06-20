@@ -73,7 +73,7 @@ const BrowseInfluencers = () => {
             setInfluencers(res.data.answerers);
             setTotal(res.data.total);
         } catch {
-            toast.error('Failed to load influencers');
+            toast.error('Failed to load mentors');
         } finally {
             setLoading(false);
         }
@@ -81,7 +81,7 @@ const BrowseInfluencers = () => {
 
     return (
         <Container className="py-5">
-            <h2 className="text-36 mb-4">Browse Influencers</h2>
+            <h2 className="text-36 mb-4">Browse Mentors</h2>
             <TableCard
                 header={
                     <>
@@ -127,7 +127,7 @@ const BrowseInfluencers = () => {
                 footer={
                     <>
                         <p className="text-muted mb-0">
-                            Showing {Math.min(page * limit, total)} of {total} influencers
+                            Showing {Math.min(page * limit, total)} of {total} mentors
                         </p>
                         <div className="d-flex gap-2">
                             <Button

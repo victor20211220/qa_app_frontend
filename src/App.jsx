@@ -51,7 +51,7 @@ const DashboardRouter = () => {
     }, [userToken, userType, navigate]);
 
     if (!userToken) return <Home/>;
-    if (userType === 'answerer') return <Navigate to="/influencer"/>;
+    if (userType === 'answerer') return <Navigate to="/mentor"/>;
     if (userType === 'questioner') return <Navigate to="/questioner"/>;
     return <Navigate to="/login"/>;
 };
@@ -62,9 +62,9 @@ const publicRoutes = [
     {path: '/login', title: 'Login', component: Login},
     {path: '/verify-email', title: 'Verify Email', component: VerifyEmail},
     {path: '/reset-password', title: 'Reset Password', component: ResetPassword},
-    {path: '/answerer-forgot-password', title: 'Forgot Password (Influencer)', component: AnswererForgotPassword},
+    {path: '/answerer-forgot-password', title: 'Forgot Password (Mentor)', component: AnswererForgotPassword},
     {path: '/questioner-forgot-password', title: 'Forgot Password (User)', component: QuestionerForgotPassword},
-    {path: '/view-influencer', title: 'View Influencer', component: ViewInfluencer},
+    {path: '/view-mentor', title: 'View Mentor', component: ViewInfluencer},
     {path: '/list-withdrawals', title: 'List withdrawals', component: ListWithdrawals},
     {path: '/introduction', title: 'Introduction', component: Intro},
     {path: '/how-it-works', title: 'How It Works', component: HowItWorks},
@@ -72,7 +72,7 @@ const publicRoutes = [
     // Add more as needed
 ];
 const answererRoutes = [
-    {path: '', title: 'Influencer Dashboard', component: InfluencerDashboard},
+    {path: '', title: 'Mentor Dashboard', component: InfluencerDashboard},
     {path: 'edit-profile', title: 'Edit Profile', component: EditInfluencerProfile},
     {path: 'questions', title: 'My Questions', component: QuestionsDashboard},
     {path: 'view-question', title: 'View Question', component: AnswererViewQuestion},
@@ -82,7 +82,7 @@ const answererRoutes = [
 const questionerRoutes = [
     {path: '', title: 'User Dashboard', component: QuestionerDashboard},
     {path: 'edit-profile', title: 'Edit Profile', component: EditQuestionerProfile},
-    {path: 'browse-influencers', title: 'Browse Influencers', component: BrowseInfluencers},
+    {path: 'browse-mentors', title: 'Browse Mentors', component: BrowseInfluencers},
     {path: 'ask-question', title: 'Ask Question', component: AskQuestion},
     {path: 'view-question', title: 'View Question', component: QuestionerViewQuestion},
     {path: 'edit-question', title: 'Edit Question', component: EditQuestion},
@@ -106,7 +106,7 @@ const App = () => {
                         />
                     ))}
                     {/* Answerer Protected Routes */}
-                    <Route path="/influencer" element={<AnswererLayout/>}>
+                    <Route path="/mentor" element={<AnswererLayout/>}>
                         {answererRoutes.map(({path, title, component: Component}) => (
                             <Route
                                 key={path}

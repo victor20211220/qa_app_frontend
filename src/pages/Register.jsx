@@ -32,13 +32,13 @@ const Register = () => {
 
     useEffect(() => {
         const roleParam = searchParams.get('role');
-        if (roleParam === 'influencer' || roleParam === 'user') {
+        if (roleParam === 'mentor' || roleParam === 'user') {
             setKey(roleParam);
         }
     }, [searchParams]);
 
     useEffect(() => {
-        if (key === 'influencer') {
+        if (key === 'mentor') {
             axios.get('/categories').then((res) => setCategories([...res.data, {_id: null, category: 'Choose later'}]));
         }
     }, [key]);
@@ -50,12 +50,12 @@ const Register = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        if ((key === 'influencer' && !agreedInfluencer) || (key === 'user' && !agreedUser)) {
+        if ((key === 'mentor' && !agreedInfluencer) || (key === 'user' && !agreedUser)) {
             return toast.warn('Please agree to the terms.');
         }
         try {
             const endpoint =
-                key === 'influencer'
+                key === 'mentor'
                     ? '/auth/answerer/register'
                     : '/auth/questioner/register';
             await axios.post(endpoint, formData);
@@ -72,11 +72,11 @@ const Register = () => {
                 <Col lg={{span: 10, offset: 1}}>
                     <Tabs activeKey={key} onSelect={(k) => setKey(k)}
                           className="d-flex gap-2 mb-4 custom-tabs border-0">
-                        <Tab eventKey="influencer" title={
+                        <Tab eventKey="mentor" title={
                             <span className="fw-semibold">
                                <i className="fa-solid fa-star me-2"></i>
                                 <span
-                                    className={key === 'influencer' ? 'text-primary' : ''}>Register as Influencer</span>
+                                    className={key === 'mentor' ? 'text-primary' : ''}>Register as Mentor</span>
                               </span>
                         }>
                             <Card>
@@ -84,7 +84,7 @@ const Register = () => {
                                     <Form onSubmit={handleSubmit}>
                                         <Row>
                                             <Col md={6}>
-                                                <h2 className="mb-4">Influencer Information</h2>
+                                                <h2 className="mb-4">Mentor Information</h2>
                                                 <Form.Group controlId="name" className="mb-3">
                                                     <Form.Label column="name">Full Name</Form.Label>
                                                     <Form.Control
@@ -200,7 +200,7 @@ const Register = () => {
                                             <i className="fa-brands fa-facebook me-2"></i> Connect with Facebook
                                         </Button>
                                         <Button variant="primary" type="submit" className="w-100 rounded-3">
-                                            Create Influencer Account
+                                            Create Mentor Account
                                         </Button>
                                         <div className="mt-3 text-center">
                                             Already have an account? <Link to="/login" className="text-primary">Sign

@@ -11,7 +11,7 @@ const InfluencerQuestionCard = ({question}) => {
     const {questioner, created_at, question: questionText, status, answer} = question;
 
     return (
-        <ClickableLink to={`/influencer/view-question?question_id=${question._id}`}>
+        <ClickableLink to={`/mentor/view-question?question_id=${question._id}`}>
             <div className="p-4 border-bottom hover-bg-light">
                 <div className="d-flex gap-3 align-items-start">
                     <Image
@@ -33,7 +33,7 @@ const InfluencerQuestionCard = ({question}) => {
                         </div>
                         <p className="text-374151 mb-3">{questionText}</p>
                         {status === 0 && (
-                            <Button as={Link} to={`/influencer/view-question?question_id=${question._id}`}
+                            <Button as={Link} to={`/mentor/view-question?question_id=${question._id}`}
                                     variant="primary">Answer Question</Button>
                         )}
                         {answer && (

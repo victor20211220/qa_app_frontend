@@ -56,7 +56,7 @@ const InfluencerDashboard = () => {
                                         <span>Set your own rates</span>
                                     </div>
                                     <div className="mb-3"></div>
-                                    <Button className="d-block bg-2563EB" as={Link} to={`/influencer/edit-profile`}>Edit
+                                    <Button className="d-block bg-2563EB" as={Link} to={`/mentor/edit-profile`}>Edit
                                         Profile</Button>
                                 </Card.Body>
                             </Card>
@@ -107,7 +107,7 @@ const InfluencerDashboard = () => {
                                         <span>Track earnings</span>
                                     </div>
                                     <div className="mb-3"></div>
-                                    <Button variant="info" className="d-block" as={Link} to={`/influencer/questions`}>View
+                                    <Button variant="info" className="d-block" as={Link} to={`/mentor/questions`}>View
                                         Questions</Button>
                                 </Card.Body>
                             </Card>

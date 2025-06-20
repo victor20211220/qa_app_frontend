@@ -42,7 +42,7 @@ const AnswererViewQuestion = () => {
         try {
             await axios.post(`/answers/${questionId}`, {answer});
             toast.success('Answer submitted!');
-            navigate('/influencer/questions');
+            navigate('/mentor/questions');
         } catch (err) {
             toast.error('Failed to submit answer');
         }
@@ -53,7 +53,7 @@ const AnswererViewQuestion = () => {
 
     const type = question.question_type_id.type;
     const typeLabel = ['Text', 'Multiple-Choice', 'Pictures'][type];
-    const isAnswered = !!question.answer;
+    const canAnswer =  question.status !== 0;
     const hasReview = !!question.answer?.review;
 
     return (
@@ -61,7 +61,7 @@ const AnswererViewQuestion = () => {
             <div className="col-lg-8 offset-lg-2">
                 <div className="d-flex align-items-center gap-3 mb-4">
                     <BackButton/>
-                    <h2 className="mb-0 pb-2">{`${isAnswered ? "View" : "Answer"} ${typeLabel} Question`}</h2>
+                    <h2 className="mb-0 pb-2">{`${canAnswer ? "View" : "Answer"} ${typeLabel} Question`}</h2>
                 </div>
                 <Card className="p-4 rounded-4 border border-light-subtle bg-white mb-4">
                     <div className="d-flex align-items-center gap-3 mb-4">
@@ -111,11 +111,11 @@ const AnswererViewQuestion = () => {
                             rows={5}
                             value={answer}
                             onChange={(e) => setAnswer(e.target.value)}
-                            disabled={isAnswered}
+                            disabled={canAnswer}
                         />
                     </Form.Group>
 
-                    {!isAnswered && (
+                    {!canAnswer && (
                         <Button onClick={handleSubmit}>Submit Answer</Button>
                     )}
 

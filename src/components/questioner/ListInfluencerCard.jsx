@@ -17,7 +17,7 @@ const InfluencerCard = ({influencer}) => {
             <div className="d-flex flex-column flex-md-row gap-4 align-items-center align-items-md-start mb-4">
                 <Image
                     src={getAvatar(influencer.photo)}
-                    alt="Influencer"
+                    alt="mentor"
                     roundedCircle
                     width={128}
                     height={128}

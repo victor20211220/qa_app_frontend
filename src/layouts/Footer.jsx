@@ -14,7 +14,7 @@ const Footer = () => {
                             <img src={footerLogoImage} alt="" height="50"/>
                         </Link>
                         <div className="mb-3 pb-3"></div>
-                        <p className="text-secondary text-14">Connect with influencers and get expert answers to your
+                        <p className="text-secondary text-14">Connect with mentors and get expert answers to your
                             questions.</p>
                     </Col>
                     <Col lg={9}>

@@ -12,7 +12,7 @@ const influencerLinks = [
         to: "/", title: "Dashboard",
     },
     {
-        to: "/influencer/questions", title: "Questions",
+        to: "/mentor/questions", title: "Questions",
     },
     {
         to: "/", title: "Analytics",
@@ -21,7 +21,7 @@ const influencerLinks = [
 
 const questionerLinks = [
     {
-        to: "/questioner/browse-influencers", title: "Browse Influencers",
+        to: "/questioner/browse-mentors", title: "Browse Mentors",
     },
     {
         to: "/questioner/my-questions", title: "My Questions",
@@ -86,13 +86,13 @@ const Header = () => {
 
                                 <Dropdown.Menu>
                                     <Dropdown.Item as={Link}
-                                                   to={(isQuestioner ? `/questioner/edit-profile` : `/influencer/edit-profile`)}>Edit
+                                                   to={(isQuestioner ? `/questioner/edit-profile` : `/mentor/edit-profile`)}>Edit
                                         Profile</Dropdown.Item>
                                     {!isQuestioner &&
                                         <>
                                             <Dropdown.Item as={Link} to={viewInfluencerLink(user._id)}>View
                                                 Profile</Dropdown.Item>
-                                            <Dropdown.Item as={Link} to={`/influencer/withdrawal`}>Withdrawal</Dropdown.Item>
+                                            <Dropdown.Item as={Link} to={`/mentor/withdrawal`}>Withdrawal</Dropdown.Item>
                                         </>
                                     }
                                     <Dropdown.Divider/>

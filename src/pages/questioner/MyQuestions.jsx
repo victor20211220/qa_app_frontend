@@ -96,7 +96,7 @@ const MyQuestions = () => {
     return (
         <Container className="py-5">
             <h2 className="text-36 mb-4">Questions Dashboard</h2>
-            <p className="text-20 mb-0">View questions and review answers from your influencers</p>
+            <p className="text-20 mb-0">View questions and review answers from your mentors</p>
             <div className="mb-4 pb-2"></div>
             <div className="mb-4 pb-2">
                 <Row className="g-3">

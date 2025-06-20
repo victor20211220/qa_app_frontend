@@ -114,7 +114,7 @@ const EditQuestion = () => {
                         <div className="d-flex align-items-center gap-3 mb-4">
                             <Image
                                 src={getAvatar(answerer.photo)}
-                                alt="Influencer"
+                                alt="Mentor"
                                 roundedCircle
                                 width={48}
                                 height={48}
