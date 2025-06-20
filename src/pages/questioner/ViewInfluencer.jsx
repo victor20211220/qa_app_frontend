@@ -160,6 +160,9 @@ const ViewInfluencer = () => {
                             <p className="text-374151 mb-4">
                                 {data.bio}
                             </p>
+                            <p className="text-374151 mb-4">
+                                {data.expert_topics}
+                            </p>
                             <div className="d-flex flex-wrap gap-4">
                                 <div className="d-flex align-items-center gap-2">
                                     <i className="fa-solid fa-star text-warning"></i>

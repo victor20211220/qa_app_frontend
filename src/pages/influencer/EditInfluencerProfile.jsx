@@ -51,6 +51,7 @@ const EditInfluencerProfile = () => {
         youtube: '',
         tiktok: '',
         bio: '',
+        expert_topics: '',  // Added this field
     });
     const [expertise, setExpertise] = useState([]);
     const [photoPreview, setPhotoPreview] = useState('');
@@ -74,6 +75,7 @@ const EditInfluencerProfile = () => {
                 youtube: res.data.youtube || '',
                 tiktok: res.data.tiktok || '',
                 bio: res.data.bio || '',
+                expert_topics: res.data.expert_topics || '',  // Populate expert_topics field
                 category_id: res.data.category_id || '',
             });
             setExpertise(res.data.expertise || []);
@@ -116,6 +118,7 @@ const EditInfluencerProfile = () => {
             formData.append('tiktok', form.tiktok);
             formData.append('bio', form.bio);
             formData.append('expertise', JSON.stringify(expertise));
+            formData.append('expert_topics', form.expert_topics);  // Send expert_topics data
             if (photoFile) {
                 formData.append('photo', photoFile);
             }
@@ -194,7 +197,6 @@ const EditInfluencerProfile = () => {
                                 />
                             </Form.Group>
                             <Educations/>
-
                             <div className="mb-3 pb-3"></div>
                             <h2 className="text-20 fw-bold mb-4">Social Media Links</h2>
                             <Row className="g-3 mb-4">
@@ -248,6 +250,18 @@ const EditInfluencerProfile = () => {
                                     rows={5}
                                     placeholder="Tell us about yourself…"
                                     value={form.bio}
+                                    onChange={handleChange}
+                                />
+                            </Form.Group>
+
+                            <h2 className="text-20 fw-bold mb-4">Topics I am good at answering</h2>
+                            <Form.Group className="mb-4">
+                                <Form.Control
+                                    as="textarea"
+                                    name="expert_topics"
+                                    rows={5}
+                                    placeholder="Describe your expert topics..."
+                                    value={form.expert_topics}
                                     onChange={handleChange}
                                 />
                             </Form.Group>
