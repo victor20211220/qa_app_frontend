@@ -203,7 +203,7 @@ const Register = () => {
                                             Create Mentor Account
                                         </Button>
                                         <div className="mt-3 text-center">
-                                            Already have an account? <Link to="/login" className="text-primary">Sign
+                                            Already have an account? <Link to="/login?role=mentor" className="text-primary">Sign
                                             in</Link>
                                         </div>
                                     </Form>
@@ -281,7 +281,7 @@ const Register = () => {
                                             Create User Account
                                         </Button>
                                         <div className="mt-3 text-center">
-                                            Already have an account? <Link to="/login" className="text-primary">Sign
+                                            Already have an account? <Link to="/login?role=user" className="text-primary">Sign
                                             in</Link>
                                         </div>
                                     </Form>

@@ -62,9 +62,9 @@ const Header = () => {
                                     <Nav.Link as={Link} to="/">Home</Nav.Link>
                                     <Dropdown align="end">
                                         <Dropdown.Toggle variant="light"
-                                                         className="d-flex align-items-center gap-2 border-0 bg-white pe-0">
-                                            <Nav.Link>How it works</Nav.Link>
-                                            <i className="fas fa-chevron-down ms-2 text-muted"/>
+                                                         className="d-flex align-items-center gap-2 border-0 bg-white px-3 py-2 pe-0">
+                                            <Nav.Link className="p-0">How it works</Nav.Link>
+                                            <i className="fas fa-chevron-down text-muted"/>
                                         </Dropdown.Toggle>
                                         <Dropdown.Menu>
                                             <Dropdown.Item as={Link} to="/how-it-works1">Mentor</Dropdown.Item>
