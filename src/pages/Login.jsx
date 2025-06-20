@@ -44,7 +44,7 @@ const Login = () => {
     };
 
     // Show the appropriate form based on the role query param or the button clicked
-    const [currentForm, setCurrentForm] = useState(role || 'mentor');  // Default to 'mentor'
+    const [currentForm, setCurrentForm] = useState(role || 'user');  // Default to 'mentor'
 
     useEffect(() => {
         if (role) {
@@ -56,16 +56,16 @@ const Login = () => {
         <Container className="py-5">
             <div className="d-flex justify-content-center align-items-center gap-2 mb-4">
                 <Button
-                    variant="primary"
-                    onClick={() => setCurrentForm('mentor')} // Show Mentor form
-                >
-                    <i className="fa-solid fa-star text-white me-2"></i>Mentor Login
-                </Button>
-                <Button
                     variant="info"
                     onClick={() => setCurrentForm('user')} // Show User form
                 >
                     <i className="fa-solid fa-user text-white me-2"></i>User Login
+                </Button>
+                <Button
+                    variant="primary"
+                    onClick={() => setCurrentForm('mentor')} // Show Mentor form
+                >
+                    <i className="fa-solid fa-star text-white me-2"></i>Mentor Login
                 </Button>
             </div>
 

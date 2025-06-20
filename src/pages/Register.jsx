@@ -72,6 +72,85 @@ const Register = () => {
                 <Col lg={{span: 10, offset: 1}}>
                     <Tabs activeKey={key} onSelect={(k) => setKey(k)}
                           className="d-flex gap-2 mb-4 custom-tabs border-0">
+
+                        <Tab eventKey="user" title={
+                            <span className="fw-semibold">
+                               <i className="fa-solid fa-user me-2"></i>
+                                    <span className={key === 'user' ? 'text-primary' : ''}>Register as User</span>
+                                  </span>
+                        }>
+                            <Card>
+                                <Card.Body>
+                                    <Form onSubmit={handleSubmit}>
+                                        <h2>User Information</h2>
+                                        <Form.Group controlId="questioner_name" className="mb-3">
+                                            <Form.Label column="">Full Name</Form.Label>
+                                            <Form.Control
+                                                name="name"
+                                                type="text"
+                                                placeholder="Enter your full name"
+                                                required
+                                                value={formData.name}
+                                                onChange={handleChange}
+                                            />
+                                        </Form.Group>
+                                        <Form.Group controlId="questioner_email" className="mb-3">
+                                            <Form.Label column="">Email Address</Form.Label>
+                                            <Form.Control
+                                                name="email"
+                                                type="email"
+                                                placeholder="Enter your email"
+                                                required
+                                                value={formData.email}
+                                                onChange={handleChange}
+                                            />
+                                        </Form.Group>
+                                        <Form.Group controlId="questioner_password" className="mb-3">
+                                            <Form.Label column="">Password</Form.Label>
+                                            <Form.Control
+                                                name="password"
+                                                type="password"
+                                                placeholder="Create a password"
+                                                required
+                                                value={formData.password}
+                                                onChange={handleChange}
+                                            />
+                                        </Form.Group>
+                                        <Form.Check
+                                            className="mb-3"
+                                            id="terms_user"
+                                            type="checkbox"
+                                            label="I agree to the Terms of Service and Privacy Policy"
+                                            checked={agreedUser}
+                                            onChange={(e) => setAgreedUser(e.target.checked)}
+                                            required
+                                        />
+                                        <Button
+                                            type="button"
+                                            variant="danger"
+                                            className="mb-3 w-100 rounded-3"
+                                            onClick={() => window.location.href = `${API_URL}/auth/google/questioner`}>
+                                            <i className="fa-brands fa-google me-2"></i> Connect with Google
+                                        </Button>
+                                        <Button
+                                            type="button"
+                                            variant="info"
+                                            className="mb-3 w-100 rounded-3"
+                                            onClick={() => window.location.href = `https://www.facebook.com/v19.0/dialog/oauth?client_id=${FACEBOOK_CLIENT_ID}&redirect_uri=${API_URL}/auth/facebook/callback/questioner&scope=email,public_profile`}>
+                                            <i className="fa-brands fa-facebook me-2"></i> Connect with Facebook
+                                        </Button>
+                                        <Button variant="primary" type="submit" className="w-100 rounded-3">
+                                            Create User Account
+                                        </Button>
+                                        <div className="mt-3 text-center">
+                                            Already have an account? <Link to="/login?role=user"
+                                                                           className="text-primary">Sign
+                                            in</Link>
+                                        </div>
+                                    </Form>
+                                </Card.Body>
+                            </Card>
+                        </Tab>
                         <Tab eventKey="mentor" title={
                             <span className="fw-semibold">
                                <i className="fa-solid fa-star me-2"></i>
@@ -203,7 +282,8 @@ const Register = () => {
                                             Create Mentor Account
                                         </Button>
                                         <div className="mt-3 text-center">
-                                            Already have an account? <Link to="/login?role=mentor" className="text-primary">Sign
+                                            Already have an account? <Link to="/login?role=mentor"
+                                                                           className="text-primary">Sign
                                             in</Link>
                                         </div>
                                     </Form>
@@ -211,83 +291,6 @@ const Register = () => {
                             </Card>
                         </Tab>
 
-                        <Tab eventKey="user" title={
-                            <span className="fw-semibold">
-                               <i className="fa-solid fa-user me-2"></i>
-                                    <span className={key === 'user' ? 'text-primary' : ''}>Register as User</span>
-                                  </span>
-                        }>
-                            <Card>
-                                <Card.Body>
-                                    <Form onSubmit={handleSubmit}>
-                                        <h2>User Information</h2>
-                                        <Form.Group controlId="questioner_name" className="mb-3">
-                                            <Form.Label column="">Full Name</Form.Label>
-                                            <Form.Control
-                                                name="name"
-                                                type="text"
-                                                placeholder="Enter your full name"
-                                                required
-                                                value={formData.name}
-                                                onChange={handleChange}
-                                            />
-                                        </Form.Group>
-                                        <Form.Group controlId="questioner_email" className="mb-3">
-                                            <Form.Label column="">Email Address</Form.Label>
-                                            <Form.Control
-                                                name="email"
-                                                type="email"
-                                                placeholder="Enter your email"
-                                                required
-                                                value={formData.email}
-                                                onChange={handleChange}
-                                            />
-                                        </Form.Group>
-                                        <Form.Group controlId="questioner_password" className="mb-3">
-                                            <Form.Label column="">Password</Form.Label>
-                                            <Form.Control
-                                                name="password"
-                                                type="password"
-                                                placeholder="Create a password"
-                                                required
-                                                value={formData.password}
-                                                onChange={handleChange}
-                                            />
-                                        </Form.Group>
-                                        <Form.Check
-                                            className="mb-3"
-                                            id="terms_user"
-                                            type="checkbox"
-                                            label="I agree to the Terms of Service and Privacy Policy"
-                                            checked={agreedUser}
-                                            onChange={(e) => setAgreedUser(e.target.checked)}
-                                            required
-                                        />
-                                        <Button
-                                            type="button"
-                                            variant="danger"
-                                            className="mb-3 w-100 rounded-3"
-                                            onClick={() => window.location.href = `${API_URL}/auth/google/questioner`}>
-                                            <i className="fa-brands fa-google me-2"></i> Connect with Google
-                                        </Button>
-                                        <Button
-                                            type="button"
-                                            variant="info"
-                                            className="mb-3 w-100 rounded-3"
-                                            onClick={() => window.location.href = `https://www.facebook.com/v19.0/dialog/oauth?client_id=${FACEBOOK_CLIENT_ID}&redirect_uri=${API_URL}/auth/facebook/callback/questioner&scope=email,public_profile`}>
-                                            <i className="fa-brands fa-facebook me-2"></i> Connect with Facebook
-                                        </Button>
-                                        <Button variant="primary" type="submit" className="w-100 rounded-3">
-                                            Create User Account
-                                        </Button>
-                                        <div className="mt-3 text-center">
-                                            Already have an account? <Link to="/login?role=user" className="text-primary">Sign
-                                            in</Link>
-                                        </div>
-                                    </Form>
-                                </Card.Body>
-                            </Card>
-                        </Tab>
                     </Tabs>
                 </Col>
             </Row>

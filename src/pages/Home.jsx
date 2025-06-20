@@ -41,38 +41,6 @@ const Home = () => {
                         <Card>
                             <Card.Body>
                                 <div
-                                    className="d-flex align-items-center justify-content-center bg-E0E7FF rounded-circle home-image-block mx-auto mb-4">
-                                    <i className="fa-solid fa-star text-primary text-36"></i>
-                                </div>
-                                <div className="text-center">
-                                    <h2 className="mb-4">I'm an Mentor</h2>
-                                    <p className="mb-4">Share your expertise and earn money by answering questions from
-                                        your
-                                        audience</p>
-                                </div>
-                                <div className="mb-3">
-                                    <i className="fa-solid fa-check text-success me-3"></i>
-                                    <span>Set your own rates</span>
-                                </div>
-                                <div className="mb-3">
-                                    <i className="fa-solid fa-check text-success me-3"></i>
-                                    <span>Flexible schedule</span>
-                                </div>
-                                <div className="mb-3">
-                                    <i className="fa-solid fa-check text-success me-3"></i>
-                                    <span>Build your personal brand</span>
-                                </div>
-                                <div className="mb-3"></div>
-                                <Button variant="primary" className="d-block" as={Link}
-                                        to={`/register?role=mentor`}>Join as
-                                    Mentor</Button>
-                            </Card.Body>
-                        </Card>
-                    </Col>
-                    <Col lg={{span: 5}} className="mb-4">
-                        <Card>
-                            <Card.Body>
-                                <div
                                     className="d-flex align-items-center justify-content-center bg-EDE9FE rounded-circle home-image-block mx-auto mb-4">
                                     <i className="fa-solid fa-user text-info text-36"></i>
                                 </div>
@@ -98,6 +66,38 @@ const Home = () => {
                                 <Button variant="info" className="d-block" as={Link} to={`/register?role=user`}>
                                     Start Asking Questions
                                 </Button>
+                            </Card.Body>
+                        </Card>
+                    </Col>
+                    <Col lg={{span: 5}} className="mb-4">
+                        <Card>
+                            <Card.Body>
+                                <div
+                                    className="d-flex align-items-center justify-content-center bg-E0E7FF rounded-circle home-image-block mx-auto mb-4">
+                                    <i className="fa-solid fa-star text-primary text-36"></i>
+                                </div>
+                                <div className="text-center">
+                                    <h2 className="mb-4">I'm an Mentor</h2>
+                                    <p className="mb-4">Share your expertise and earn money by answering questions from
+                                        your
+                                        audience</p>
+                                </div>
+                                <div className="mb-3">
+                                    <i className="fa-solid fa-check text-success me-3"></i>
+                                    <span>Set your own rates</span>
+                                </div>
+                                <div className="mb-3">
+                                    <i className="fa-solid fa-check text-success me-3"></i>
+                                    <span>Flexible schedule</span>
+                                </div>
+                                <div className="mb-3">
+                                    <i className="fa-solid fa-check text-success me-3"></i>
+                                    <span>Build your personal brand</span>
+                                </div>
+                                <div className="mb-3"></div>
+                                <Button variant="primary" className="d-block" as={Link}
+                                        to={`/register?role=mentor`}>Join as
+                                    Mentor</Button>
                             </Card.Body>
                         </Card>
                     </Col>
