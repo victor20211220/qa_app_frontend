@@ -22,20 +22,15 @@ const Footer = () => {
                             <Col lg={4}>
                                 <p className="text-white fw-bold mb-3">Company</p>
                                 <Link to={"/"} className="mb-2 text-secondary d-block">About</Link>
-                                <Link to={"/"} className="mb-2 text-secondary d-block">Careers</Link>
-                                <Link to={"/"} className="mb-2 text-secondary d-block">Press</Link>
                             </Col>
                             <Col lg={4}>
                                 <p className="text-white fw-bold mb-3">Resources</p>
-                                <Link to={"/"} className="mb-2 text-secondary d-block">Blog</Link>
-                                <Link to={"/"} className="mb-2 text-secondary d-block">Help Center</Link>
-                                <Link to={"/"} className="mb-2 text-secondary d-block">Guidelines</Link>
+                                <Link to={"https://youmentor.me/blog-list"} className="mb-2 text-secondary d-block">Blog</Link>
                             </Col>
                             <Col lg={4}>
                                 <p className="text-white fw-bold mb-3">Legal</p>
-                                <Link to={"/"} className="mb-2 text-secondary d-block">Privacy</Link>
-                                <Link to={"/"} className="mb-2 text-secondary d-block">Terms</Link>
-                                <Link to={"/"} className="mb-2 text-secondary d-block">Cookie Policy</Link>
+                                <Link to={"https://youmentor.me/privacy-policy"} className="mb-2 text-secondary d-block">Privacy</Link>
+                                <Link to={"https://youmentor.me/terms-and-conditions"} className="mb-2 text-secondary d-block">Terms</Link>
                             </Col>
                         </Row>
                     </Col>
