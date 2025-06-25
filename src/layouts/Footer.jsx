@@ -42,7 +42,7 @@ const Footer = () => {
                 </Row>
             </Container>
             <div className="mb-3 pb-3"></div>
-            <p className="text-center text-14 text-secondary">© 2025 AskPro. All rights reserved.</p>
+            <p className="text-center text-14 text-secondary">© 2025 YouMentor.Me. All rights reserved.</p>
         </footer>
     )
 };
