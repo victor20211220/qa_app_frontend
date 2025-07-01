@@ -4,6 +4,7 @@ import {useAppContext} from '../context/AppContext.jsx';
 import {getAvatar, viewInfluencerLink} from '../utils/helpers.js';
 import Container from 'react-bootstrap/Container';
 import Navbar from 'react-bootstrap/Navbar';
+import { useEffect } from 'react';
 
 import logoImage from '../assets/images/logo.svg';
 
@@ -36,18 +37,27 @@ const Header = () => {
     const isQuestioner = userType === 'questioner';
     const isLoggedIn = !!user;
     const links = isLoggedIn ? (isQuestioner ? questionerLinks : influencerLinks) : [];
+    
+    useEffect(() => {
+        // Load the gtag.js script
+        const script = document.createElement('script');
+        script.src = 'https://www.googletagmanager.com/gtag/js?id=AW-17077652987';
+        script.async = true;
+        document.head.appendChild(script);
 
+        // Inject the inline gtag init script
+        const inlineScript = document.createElement('script');
+        inlineScript.innerHTML = `
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'AW-17077652987');
+        `;
+        document.head.appendChild(inlineScript);
+    }, []);
+    
     return (
         <header>
-                <!-- Google tag (gtag.js) -->
-                <script async src="https://www.googletagmanager.com/gtag/js?id=AW-17077652987"></script>
-                <script>
-                  window.dataLayer = window.dataLayer || [];
-                  function gtag(){dataLayer.push(arguments);}
-                  gtag('js', new Date());
-                
-                  gtag('config', 'AW-17077652987');
-                </script>
             <Navbar expand="lg" className="bg-white py-3">
                 <Container>
                     <Navbar.Brand as={Link} to="/">
