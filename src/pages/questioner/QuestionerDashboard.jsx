@@ -62,7 +62,7 @@ const QuestionerDashboard = () => {
                     ))}
                 </Row>
             </section>
-            <section id="recent-questions">
+            {/* <section id="recent-questions">
                 <h2 className="h4 fw-bold text-dark mb-4">Recent Questions</h2>
                 <div className="d-flex flex-column gap-3">
                     {data.recent_questions.map((q) => (
@@ -87,7 +87,7 @@ const QuestionerDashboard = () => {
                         </Card>
                     ))}
                 </div>
-            </section>
+            </section> */}
         </Container>
     );
 };
