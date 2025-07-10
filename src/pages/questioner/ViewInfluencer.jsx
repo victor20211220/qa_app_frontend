@@ -199,7 +199,6 @@ const ViewInfluencer = () => {
                                 description = "Short, specific questions with concise answers. Perfect for quick guidance.";
                                 details = [
                                     `${q.response_time}-hour response time`,
-                                    'One follow-up question',
                                 ];
                             } else if (q.type === 1) {
                                 title = 'Multiple Choice Question';
