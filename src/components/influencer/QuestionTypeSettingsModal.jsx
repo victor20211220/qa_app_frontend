@@ -166,7 +166,7 @@ const QuestionTypeSettingsModal = ({show, onClose, answererId}) => {
                         <Row>
                             <Col md={6}>
                                 <Form.Group controlId={`price_${idx}`} className="mb-3">
-                                    <Form.Label column="">Fixed price ($)</Form.Label>
+                                    <Form.Label column="">Fixed price ($) (Note: 15% Charge is taken from the amount, please add it to your common fee)</Form.Label>
                                     <Form.Control
                                         type="number"
                                         value={q.price}
