@@ -205,7 +205,7 @@ const ViewInfluencer = () => {
                                 description = "Get expert answers from pre-defined options for your specific questions.";
                                 details = [
                                     `Up to ${q.number_of_choice_options} answer options`,
-                                    'Brief explanation included',
+                                    
                                     'Life is full of choices, let our mentor tell you, which in their opinion would be the best course of action, product, or decision',
                                     `${q.response_time}-hour response time`
                                 ];
