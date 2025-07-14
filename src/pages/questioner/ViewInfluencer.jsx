@@ -195,8 +195,8 @@ const ViewInfluencer = () => {
                             let details = [];
 
                             if (q.type === 0) {
-                                title = 'Quick Question';
-                                description = "Short, specific questions with concise answers. Perfect for quick guidance.";
+                                title = 'Text Question';
+                                description = "Questions that need more explaining, or need a more thorough answer. Perfect for quick guidance.";
                                 details = [
                                     `${q.response_time}-hour response time`,
                                 ];
@@ -206,6 +206,7 @@ const ViewInfluencer = () => {
                                 details = [
                                     `Up to ${q.number_of_choice_options} answer options`,
                                     'Brief explanation included',
+                                    'Life is full of choices, let our mentor tell you, which in their opinion would be the best course of action, product, or decision',
                                     `${q.response_time}-hour response time`
                                 ];
                             } else if (q.type === 2) {
@@ -214,7 +215,9 @@ const ViewInfluencer = () => {
                                 details = [
                                     `Upload up to ${q.number_of_picture_options} images`,
                                     'Detailed visual feedback',
-                                    'One revision included',
+                                    'Do you have an important event coming up and need help picking an outfit?',
+                                    'Do you need an opinion on your visual work or have a technical issue?',
+                                    'Just take a picture and our mentors will help you.',
                                     `${q.response_time}-hour response time`
                                 ];
                             }
