@@ -58,6 +58,15 @@ const Header = () => {
     
     return (
         <header>
+            <!-- Google tag (gtag.js) -->
+            <script async src="https://www.googletagmanager.com/gtag/js?id=G-5GZDW70HJ0"></script>
+                <script>
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){dataLayer.push(arguments);}
+                gtag('js', new Date());
+
+                gtag('config', 'G-5GZDW70HJ0');
+             </script>
             <Navbar expand="lg" className="bg-white py-3">
                 <Container>
                     <Navbar.Brand as={Link} to="/">
